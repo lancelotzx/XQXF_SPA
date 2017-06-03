@@ -34,7 +34,7 @@ text/css' />
  			$('sel_menu').select2();
  		})
 	</script>
-<form role="form" id="naviform" name="naviform">
+
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
 	<div class="container">
 		<div class="navbar-header">
@@ -46,14 +46,16 @@ text/css' />
 			<div  sytle="color:#fff" class="col-xs-6 col-sm-3"><h3>居民信息检查</h3></div>
 		</div>
 		<div class="navbar-collapse collapse move-me">
+        <form role="form" id="naviform" name="naviform">
 			<ul class="nav navbar-nav navbar-right">
 				<li ><a href=""><h3>填写检查</h3></a></li>
 			</ul>
+        </form>
 		</div>
 	   
 	</div>
 </div>
-</form>
+
   <!--NAVBAR SECTION END-->
 <div class="home-sec" id="home" >
 <div class="overlay">
@@ -95,6 +97,7 @@ text/css' />
 </div>
 <!--HOME SECTION TAG LINE END-->   
 	 <div id="features-sec" class="container set-pad" >
+     <form role="form" id="locateform" name="locateform">
 		 <div class="row text-center">
 			 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
 				<h1 data-scroll-reveal="enter from the bottom after 0.2s"  class="header-line">当前位置提交
@@ -141,7 +144,7 @@ text/css' />
 			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			                <h4 class="modal-title" id="myModalLabel">定位信息已提交</h4>
 			            </div>
-			            <div class="modal-body">您在当前巡检小区附近。<br>
+			            <div class="modal-body">
 			           		 点击任意背景位置继续。
 			            </div>
 			            <div class="modal-footer">
@@ -179,7 +182,7 @@ text/css' />
 							result = "您当前的坐标为"+r.point.lng+","+r.point.lat;
 							$('body').append("<input id='latd'  value='"+r.point.lat+"'>");
 							$('body').append("<input id='lng'   value='"+r.point.lng+"'>");
-
+						    
 
 							//console.log(result);
 							return result;
@@ -189,7 +192,13 @@ text/css' />
 							//alert('failed'+this.getStatus());
 							result = "暂时无法获取坐标";
 							return result;
-						}        
+						} 
+						$.ajax({
+								 type: "POST",
+								 url:ajaxCallUrl,
+								 data:$('#locateform').serialize(),// 要提交的表单 
+								 success: function(msg) {alert(msg);}
+						});       
 					},{enableHighAccuracy: true})
 
 				//关于状态码
@@ -208,12 +217,10 @@ text/css' />
 			</div>
 		</div>			 
 	</div>
+    </form>
 </div>
 <!-- FEATURES SECTION END-->
 
- 
-
-   </div>
  
 			 
 
