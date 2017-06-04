@@ -33,16 +33,9 @@ text/css' />
 <body >
 	<%
 		String tempCellString = request.getAttribute("cellList").toString().trim();
-		//out.println("AAA"+tempCellString); 
-		//String[] pageCellList = tempCellString.split(","); 
-
+		String tempPcsName    = request.getAttribute("pcsname").toString().trim();
+		//out.println(tempPcsName);
 	%>
-	<script>
- 		$(document).ready(function (){
- 			$('sel_menu').select2();
- 			
- 	})
-	</script>
 
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
 	<div class="container">
@@ -78,7 +71,7 @@ text/css' />
 					<!-- Slider 01 -->
 					<li>
 						<h3>您的单位是：</h3>
-					    <h3>%派出所名称%</h3>
+					    <h3><%=tempPcsName%></h3>
 						<a  href="#features-sec" class="btn btn-info btn-lg" >
 							填写开始 
 						</a>
@@ -106,7 +99,7 @@ text/css' />
 </div>
 <!--HOME SECTION TAG LINE END-->   
 	 <div id="features-sec" class="container set-pad" >
-     <form role="form" id="locateform" name="locateform" action="test.jsp">
+     <form role="form" id="locateform" name="locateform" action="GetCellAction" method="post">
 		 <div class="row text-center">
 			 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
 				<h1 data-scroll-reveal="enter from the bottom after 0.2s"  class="header-line">当前位置提交
