@@ -38,20 +38,7 @@ text/css' />
 		//这里类似xq_info_collect.jsp。变量名称待定
  		$().ready(function (){
  			$("#xiaofangDevice").select2();
- 			/*
- 			var celljsonarr = eval(<%=tempCellJsonString%>);
- 			for(var i in celljsonarr){
- 				console.log("item="+i+"value="+celljsonarr[i]);
- 				if("cellName"==i){//如果是小区名称，那么对strong标签特殊处理
- 					$("#cellnametitle").append(celljsonarr[i]);
- 					$("#cellName").val(celljsonarr[i]);//提交隐藏字段cellname给后台作为id
- 				}
- 				else{//若是其他字段，直接通过json的字段名赋值value
- 					var obj=$('#'+i);
- 					obj.val(celljsonarr[i]);
- 				}
- 			}
- 			*/
+ 			
  			//TODO：所属社区community是下拉框，这里还没有实现
  			
 
@@ -128,7 +115,7 @@ text/css' />
 	   
 		   
 			 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-				<form 	role = "form" id="zj_info_collect_form" name="zjform" action="SetCellAction" method="post">
+				<form 	role = "form" id="zj_info_collect_form" name="zjform" action="test.jsp" method="post">
 					<!--TODO 这里的变量需要修改-->
 					<input id="buildingName" name="buildingName" type="hidden" value=""/>
 					<!--TODO END-->
@@ -164,7 +151,7 @@ text/css' />
 							<h4><span style="color:red">*</span>建筑消防设施:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="xiaofangDevice" name="xiaofangDevice" class="js-example-basic-multiple" multiple="multiple" required="required">
+						    <select id="xiaofangDevice" name="xiaofangDevice" class="form-control" multiple="multiple" required="required">
 									<option value="室内消火栓系统">室内消火栓系统</option>
 									<option value="自动灭火系统">自动灭火系统</option>
 									<option value="火灾自动报警系统">火灾自动报警系统</option>
@@ -176,12 +163,15 @@ text/css' />
 									<option value="其他">其他</option>
 
 						    </select>
-						<label for="xfd_other"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="xiaofangDevice_other" name="xiaofangDevice_other" class="form-control " placeholder="选填，当选择了消防设施的其他项后填写" />
 		  				     	
 						</div>
+
 					</div>
-					
+					<div class="form-group input-group">
+
+					<label for="xfd_other"><h4>其他:（选填）</h4></label>				
+						<input type="text" id="xiaofangDevice_other" name="xiaofangDevice_other" class="form-control " placeholder="选填，当选择了消防设施的其他项后填写" />
+					</div>
 					<div class="form-group input-group">
 						<label for="ddc_yn">
 							<h4><span style="color:red">*</span>电动车集中存放:(必选)</h4>
