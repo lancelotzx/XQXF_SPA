@@ -32,31 +32,43 @@ text/css' />
 </head>
 <body >
 	<%
-		String tempBuildingJsonString = request.getAttribute("buildingBean").toString();		
+		String tempBuildingJsonString = request.getAttribute("buildingList").toString();		
 	%>
 	<script>
-		//这里类似xq_info_collect.jsp。变量名称待定
  		$().ready(function (){
- 			$("#xiaofangDevice").select2(tags:true);
+ 			$("select").select2({
+ 				tags:true,
+ 				//minimumResultsForSearch:-1,
+ 				closeOnSelect:false,
+ 				'width':'280px'
+ 			});
+ 			$(".select2-search,.select2-focusser").remove();
 
- 			var buildingjsonarr = eval(<%=tempCetempBuildingJsonString %>);
- 			for(var i in buildingjsonarr){
- 				console.log("item="+i+"value="+buildingjsonarr[i]);
- 				var t1 = "";
- 				var t2 = "";
- 				if("buildingId"==i){
- 					t1 = buildingjsonarr[i]+"栋"；
+ 			var buildingjsonarr = eval(<%=tempBuildingJsonString%>);
+ 			var t1="";
+ 			var t2="";
+ 			var index=0;
+ 			for(var item =0; item < buildingjsonarr.length;item++){//buildingjsonarr是个array[]
+ 				var item_v = buildingjsonarr[item];
+ 				for(var detail in item_v){
+ 				
+ 				console.log("item="+detail+"  value="+item_v[detail]);
+ 				if("buildingAddr"==detail){
+ 					t2 = item_v[detail];
+ 					index++;
  				}
- 				if("buildingAddr"==i){
- 					t2 = buildingjsonarr[i];
+ 				if("buildingId"==detail){
+ 					t1 = item_v[detail]+"栋";
+ 					index++;
  				}
- 				var temp = '<p>'+t2+t1+'</p>';
- 				$("#buildinglist").append(temp); 				
- 			}
- 			
- 			//TODO：所属社区community是下拉框，这里还没有实现
- 			
+ 				
+ 				if((index>0)&&(!(index%2))){
+ 					var temp = '<p>'+t2+t1+'</p>';
+ 					$("#buildinglist").append(temp); 
 
+ 				}
+ 			}				
+ 			}			 			
  		})
 	</script>
 
@@ -165,8 +177,7 @@ text/css' />
 							<h4><span style="color:red">*</span>建筑消防设施:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="xfss" name="xfss" class="js-example-templating form-control" multiple="multiple" required="required"
-						    style="width:100%">
+						    <select id="xfss" name="xfss" class="js-example-basic-multiple form-control" multiple="multiple" required="required">
 									<option value="室内消火栓系统">室内消火栓系统</option>
 									<option value="自动灭火系统">自动灭火系统</option>
 									<option value="火灾自动报警系统">火灾自动报警系统</option>
@@ -187,7 +198,7 @@ text/css' />
 					</div>
 
 					<hr />
-					<h2>主要消防隐患</h>
+					<h2>主要消防隐患</h2>
 					<hr />
 					<!--安全疏散-->
 					<div class="form-group input-group">
@@ -195,8 +206,7 @@ text/css' />
 							<h4><span style="color:red">*</span>安全疏散（通道、出口、楼梯）:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="yinhuanSafeLeave" name="yinhuanSafeLeave" class="js-example-templating form-control" multiple="multiple" required="required"
-						    style="width:100%">
+						    <select id="yinhuanSafeLeave" name="yinhuanSafeLeave" class="js-example-basic-multiple form-control" multiple="multiple" required="required">
 									<option value="无隐患">无隐患</option>
 									<option value="未设置">未设置</option>
 									<option value="消防通道阻塞">消防通道阻塞</option>
@@ -224,7 +234,7 @@ text/css' />
 							<h4><span style="color:red">*</span>应急照明:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="yinhuanYjzmDevice" name="yinhuanYjzmDevice" class="js-example-templating form-control" multiple="multiple" required="required"
+						    <select id="yinhuanYjzmDevice" name="yinhuanYjzmDevice" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
 						    style="width:100%">
 									<option value="无隐患">无隐患</option>
 									<option value="未设置">未设置</option>
@@ -248,7 +258,7 @@ text/css' />
 							<h4><span style="color:red">*</span>疏散指示标志:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="yinhuanLeaveItem" name="yinhuanLeaveItem" class="js-example-templating form-control" multiple="multiple" required="required"
+						    <select id="yinhuanLeaveItem" name="yinhuanLeaveItem" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
 						    style="width:100%">
 									<option value="无隐患">无隐患</option>
 									<option value="未设置">未设置</option>
@@ -269,7 +279,7 @@ text/css' />
 							<h4><span style="color:red">*</span>消防给水:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="yinhuanXfGiveWater" name="yinhuanXfGiveWater" class="js-example-templating form-control" multiple="multiple" required="required"
+						    <select id="yinhuanXfGiveWater" name="yinhuanXfGiveWater" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
 						    style="width:100%">
 									<option value="无隐患">无隐患</option>
 									<option value="未设置">未设置</option>
@@ -290,7 +300,7 @@ text/css' />
 							<h4><span style="color:red">*</span>室内消火栓系统:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="yinhuanInnerKillFireSystem" name="yinhuanInnerKillFireSystem" class="js-example-templating form-control" multiple="multiple" required="required" style="width:100%">
+						    <select id="yinhuanInnerKillFireSystem" name="yinhuanInnerKillFireSystem" class="js-example-basic-multiple form-control" multiple="multiple" required="required" style="width:100%">
 									<option value="无隐患">无隐患</option>
 									<option value="无水-设施损坏">无水-设施损坏导致</option>
 									<option value="无水-市政管网无水">无水-市政管网无水导致</option>
@@ -313,7 +323,7 @@ text/css' />
 							<h4><span style="color:red">*</span>自动灭火系统:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="yinhuanAutoKillFireSystem" name="yinhuanAutoKillFireSystem" class="js-example-templating form-control" multiple="multiple" required="required"
+						    <select id="yinhuanAutoKillFireSystem" name="yinhuanAutoKillFireSystem" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
 						    style="width:100%">
 									<option value="无隐患">无隐患</option>
 									<option value="未设置">未设置</option>
@@ -334,7 +344,7 @@ text/css' />
 							<h4><span style="color:red">*</span>火灾自动报警系统:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="yinhuanFireAutoReportSystem" name="yinhuanFireAutoReportSystem" class="js-example-templating form-control" multiple="multiple" required="required"
+						    <select id="yinhuanFireAutoReportSystem" name="yinhuanFireAutoReportSystem" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
 						    style="width:100%">
 									<option value="无隐患">无隐患</option>
 									<option value="未设置">未设置</option>
@@ -354,7 +364,7 @@ text/css' />
 							<h4><span style="color:red">*</span>排烟和防烟设施:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="yinhuanFilterSmokeSystem" name="yinhuanFilterSmokeSystem" class="js-example-templating form-control" multiple="multiple" required="required"
+						    <select id="yinhuanFilterSmokeSystem" name="yinhuanFilterSmokeSystem" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
 						    style="width:100%">
 									<option value="无隐患">无隐患</option>
 									<option value="未设置">未设置</option>
@@ -374,7 +384,7 @@ text/css' />
 							<h4><span style="color:red">*</span>消防电梯:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="yinhhuanXfDianTi" name="yinhhuanXfDianTi" class="js-example-templating form-control" multiple="multiple" required="required"
+						    <select id="yinhhuanXfDianTi" name="yinhhuanXfDianTi" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
 						    style="width:100%">
 									<option value="无隐患">无隐患</option>
 									<option value="未设置">未设置</option>
@@ -394,7 +404,7 @@ text/css' />
 							<h4><span style="color:red">*</span>电缆井:（必选、多选）</h4>
 						</label>
 						<div class="form-group input-group">
-						    <select id="yinhuanDianLanJin" name="yinhuanDianLanJin" class="js-example-templating form-control" multiple="multiple" required="required"
+						    <select id="yinhuanDianLanJin" name="yinhuanDianLanJin" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
 						    style="width:100%">
 									<option value="无隐患">无隐患</option>
 									<option value="管道井未封堵或不符合要求">管道井未封堵或不符合要求</option>
