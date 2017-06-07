@@ -35,6 +35,12 @@ text/css' />
 		String tempBuildingJsonString = request.getAttribute("buildingList").toString();		
 	%>
 	<script>
+		function ClickAddr(){
+			//$('#p').on('click',function(){
+				console.log($(this).val());
+			//})
+ 		}
+
  		$().ready(function (){
  			$("select").select2({
  				tags:true,
@@ -45,31 +51,80 @@ text/css' />
  			$(".select2-search,.select2-focusser").remove();
 
  			var buildingjsonarr = eval(<%=tempBuildingJsonString%>);
+ 			var t0="";
  			var t1="";
  			var t2="";
  			var index=0;
- 			for(var item =0; item < buildingjsonarr.length;item++){//buildingjsonarr是个array[]
+ 			//下文ajax方法要对单个building的动态增加的<p>还要绑定data参数，在这里需要放入数组
+ 			var b_addr_arr=[];
+ 			var b_id_arr=[];
+
+
+ 			for(var item =0; item < buildingjsonarr.length;item++){
+ 				//buildingjsonarr是个array[]，长度是建筑个数,成员是object
  				var item_v = buildingjsonarr[item];
  				for(var detail in item_v){
- 				
- 				console.log("item="+detail+"  value="+item_v[detail]);
- 				if("buildingAddr"==detail){
- 					t2 = item_v[detail];
- 					index++;
- 				}
- 				if("buildingId"==detail){
- 					t1 = item_v[detail]+"栋";
- 					index++;
- 				}
- 				
- 				if((index>0)&&(!(index%2))){
- 					var temp = '<p>'+t2+t1+'</p>';
- 					$("#buildinglist").append(temp); 
+	 				//item_v是一个建筑的object，里面有buildingAddr和buildingId两个成员
+	 				console.log("item="+detail+"  value="+item_v[detail]);
+	 				if("buildingAddr"==detail){
+	 					t2 = item_v[detail];
+	 					b_addr_arr.push(t2);
+	 					index++;
+	 				}
+	 				if("buildingId"==detail){
+	 					t0 = item_v[detail];
+	 					b_id_arr.push(t0);
+	 					t1 = item_v[detail]+"栋";
+	 					index++;
+	 				}
+	 				
+	 				if((index>0)&&(!(index%2))){//index==2,4,6...进入
+	 					//拼出完整的地址+门栋，只有index为偶数才是完整的场景
+	 					var temp = '<p>'+t2+'--'+t1+'</p>';
+	 					//var temp = '<p id=building'+(index/2-1)+'>'+t2+t1+'</p>';
+	 					$("#buildinglist").append(temp); 
 
- 				}
- 			}				
- 			}			 			
- 		})
+ 					}
+ 				}				
+ 			}
+ 			/* Test OK
+ 			for(var k in b_addr_arr)
+ 				console.log(b_addr_arr[k]);
+ 			for(var kk in b_id_arr)
+ 				console.log(b_id_arr[kk]);
+			*/
+			//ajax方法只能执行一次，不能重复binding到一个selector
+			//for(var bno=0; bno < b_addr_arr.length; bno++){//这里也不能用循环
+			
+				$('#buildinglist').on('click','p',function(){
+					var url = "GetBuildingAction";
+					//下面不能用bno参数，因为这是回调，当点击事件发生时，bno早就变成2了
+					var data = $(this).text();
+					var index = data.indexOf('--');
+					var data1 = data.substring(0,index);
+					var data2 = data.substring(index+2,data.length-1);
+					var senddata={buildingId:data2, buildingAddr:data1};
+
+					$.ajax({
+						type:"post",
+						async:false,
+						url:url,
+						data:JSON.stringify(senddata),
+						timeout:1000,
+						success:function(resp){
+							console.log("got it " + resp);
+						},
+						error:function(){
+							alert("数据请求失败，请稍后再试！");
+						}
+					})
+				})
+			
+			//}
+
+			
+	 					
+ 	})
 	</script>
 
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
@@ -121,7 +176,7 @@ text/css' />
 							<h4 class="panel-title">
 								<a id="buildname" data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="collapsed">
 									<!--use jquery add content:buildName建筑名称列表，-->
-									 点击查看建筑列表
+									 点击查看建筑列表,选择后可进行数据填写
 
 								</a>
 							</h4>
@@ -428,7 +483,6 @@ text/css' />
 		   </div>
 		</div>
 	</div> 
-</div>
  <div class="container">
 		 <div class="row set-row-pad" >
 <div class="col-lg-4 col-md-4 col-sm-4   col-lg-offset-1 col-md-offset-1 col-sm-offset-1 " data-scroll-reveal="enter from the bottom after 0.4s">
