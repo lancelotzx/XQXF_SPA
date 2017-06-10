@@ -307,7 +307,7 @@ text/css' />
 
 						<div class="div-c3">
 						<input type="text" id="yinhuanYjzmDeviceOther" name="yinhuanYjzmDeviceOther" class="input-me" 
-						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						placeholder="其他详情" style="width:70px;margin-top:90%;border-bottom: 1px #98CBF7;" required="required" />
 						</div>
 					</div>
 
@@ -358,132 +358,145 @@ text/css' />
 					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
 					<!--end add 消防给水 done-->
 
-
-
 					<!--室内消火栓系统-->
-					<div class="form-group input-group">
-						<label for="yinhuanInnerKillFireSystem">
-							<h4><span style="color:red">*</span>室内消火栓系统:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="yinhuanInnerKillFireSystem" name="yinhuanInnerKillFireSystem" class="js-example-basic-multiple form-control" multiple="multiple" required="required" style="width:100%">
-									<option value="无隐患">无隐患</option>
-									<option value="无水-设施损坏">无水-设施损坏导致</option>
-									<option value="无水-市政管网无水">无水-市政管网无水导致</option>
-									<option value="水压不足-设施损坏">水压不足-设施损坏导致</option>
-									<option 
-											value="水压不足-市政管网水压无水">水压不足-市政管网水压无水导致
-									</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+					<div >
+						<div class="div-c1" style="width:30%">
+							<span style="color:red">*</span>室内消火栓系统（多选）:
 						</div>
-					
-					<label for="yinhuanInnerKillFireSystemOther"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="yinhuanInnerKillFireSystemOther" name="yinhuanInnerKillFireSystemOther" class="form-control " placeholder="选填，当选择了上述室内消火栓隐患的‘其他’后填写其他原因" />
+						<div class="div-c2" style="width:50%">
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="无水-设施损坏" />无水-设施损坏
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="无水-市政管网无水" />无水-市政管网无水
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="水压不足-设施损坏" />水压不足-设施损坏
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="水压不足-市政管网水压无水" />水压不足-市政管网水压无水
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="其他" />其他
+						</div>
+
+						<div class="div-c3">
+						<input type="text" id="yinhuanInnerKillFireSystemOther" name="yinhuanInnerKillFireSystemOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						</div>
 					</div>
-					<!--end 室内消火栓系统-->
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 室内消火栓系统 done-->
+
 
 					<!--自动灭火系统-->
-					<div class="form-group input-group">
-						<label for="yinhuanAutoKillFireSystem">
-							<h4><span style="color:red">*</span>自动灭火系统:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="yinhuanAutoKillFireSystem" name="yinhuanAutoKillFireSystem" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
-						    style="width:100%">
-									<option value="无隐患">无隐患</option>
-									<option value="未设置">未设置</option>
-									<option value="喷头损坏">喷头损坏</option>
-									<option value="无水">无水</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+					<div >
+						<div class="div-c1" style="width:30%">
+							<span style="color:red">*</span>自动灭火系统（多选）:
 						</div>
-					
-					<label for="yinhuanAutoKillFireSystemOther"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="yinhuanAutoKillFireSystemOther" name="yinhuanAutoKillFireSystemOther" class="form-control " placeholder="选填，当选择了上述自动灭火系统隐患的‘其他’后填写其他原因" />
+						<div class="div-c2" style="width:50%">
+						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="喷头损坏" />喷头损坏
+						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="无水" />无水
+						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="其他" />其他
+						</div>
+
+						<div class="div-c3">
+						<input type="text" id="yinhuanAutoKillFireSystemOther" name="yinhuanAutoKillFireSystemOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						</div>
 					</div>
-					<!--end 自动灭火系统-->
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 自动灭火系统 done-->
 
 					<!--火灾自动报警系统-->
-					<div class="form-group input-group">
-						<label for="yinhuanFireAutoReportSystem">
-							<h4><span style="color:red">*</span>火灾自动报警系统:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="yinhuanFireAutoReportSystem" name="yinhuanFireAutoReportSystem" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
-						    style="width:100%">
-									<option value="无隐患">无隐患</option>
-									<option value="未设置">未设置</option>
-									<option value="不能正常使用">不能正常使用</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+					<div >
+						<div class="div-c1" style="width:30%">
+							<span style="color:red">*</span>火灾自动报警系统（多选）:
 						</div>
-					
-					<label for="yinhuanFireAutoReportSystemOther"><h4>其他:（选填）</h4></label>			
-						<input type="text" id="yinhuanFireAutoReportSystemOther" name="yinhuanFireAutoReportSystemOther" class="form-control " placeholder="选填，当选择了上述火灾自动报警系统隐患的‘其他’后填写其他原因" />
-					</div>
-					<!--end 火灾自动报警系统-->
+						<div class="div-c2" style="width:50%">
+						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="不能正常使用" />不能正常使用
+						    
+						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="其他" />其他
+						</div>
 
-					<!--防烟和排烟设施-->
-					<div class="form-group input-group">
-						<label for="yinhuanFilterSmokeSystem">
-							<h4><span style="color:red">*</span>排烟和防烟设施:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="yinhuanFilterSmokeSystem" name="yinhuanFilterSmokeSystem" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
-						    style="width:100%">
-									<option value="无隐患">无隐患</option>
-									<option value="未设置">未设置</option>
-									<option value="不能正常使用">不能正常使用</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+						<div class="div-c3">
+						<input type="text" id="yinhuanFireAutoReportSystemOther" name="yinhuanFireAutoReportSystemOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
 						</div>
-					
-					<label for="yinhuanFilterSmokeSystemOther"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="yinhuanFilterSmokeSystemOther" name="yinhuanFilterSmokeSystemOther" class="form-control " placeholder="选填，当选择了上述排烟和防烟设施隐患的‘其他’后填写其他原因" />
 					</div>
-					<!--end 排烟和防烟设施-->
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 自动报警系统 done-->
+
+
+
+					<!--排烟和防烟设施-->
+					<div >
+						<div class="div-c1" style="width:30%">
+							<span style="color:red">*</span>排烟和防烟设施（多选）:
+						</div>
+						<div class="div-c2" style="width:50%">
+						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="不能正常使用" />不能正常使用
+						    
+						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="其他" />其他
+						</div>
+
+						<div class="div-c3">
+						<input type="text" id="yinhuanFilterSmokeSystemOther" name="yinhuanFilterSmokeSystemOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 排烟和防烟设施 done-->
+
 
 					<!--消防电梯-->
-					<div class="form-group input-group">
-						<label for="yinhhuanXfDianTi">
-							<h4><span style="color:red">*</span>消防电梯:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="yinhhuanXfDianTi" name="yinhhuanXfDianTi" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
-						    style="width:100%">
-									<option value="无隐患">无隐患</option>
-									<option value="未设置">未设置</option>
-									<option value="不能正常使用">不能正常使用</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+					<div >
+						<div class="div-c1" style="width:30%">
+							<span style="color:red">*</span>消防电梯（多选）:
 						</div>
-					
-					<label for="yinhhuanXfDianTiOther"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="yinhhuanXfDianTiOther" name="yinhhuanXfDianTiOther" class="form-control " placeholder="选填，当选择了上述消防电梯隐患的‘其他’后填写其他原因" />
-					</div>
-					<!--end 消防电梯-->
+						<div class="div-c2" style="width:50%">
+						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="不能正常使用" />不能正常使用
+						    
+						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="其他" />其他
+						</div>
 
-					<!--电缆井-->
-					<div class="form-group input-group">
-						<label for="yinhuanDianLanJin">
-							<h4><span style="color:red">*</span>电缆井:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="yinhuanDianLanJin" name="yinhuanDianLanJin" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
-						    style="width:100%">
-									<option value="无隐患">无隐患</option>
-									<option value="管道井未封堵或不符合要求">管道井未封堵或不符合要求</option>
-									<option value="电气线路敷设不符合要求">电气线路敷设不符合要求</option>
-									<option value="防火门设置不符合要求">防火门设置不符合要求</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+						<div class="div-c3">
+						<input type="text" id="yinhuanXfDianTiOther" name="yinhuanXfDianTiOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
 						</div>
-					
-					<label for="yinhuanDianLanJinOther"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="yinhuanDianLanJinOther" name="yinhuanDianLanJinOther" class="form-control " placeholder="选填，当选择了上述电缆井隐患的‘其他’后填写其他原因" />
 					</div>
-					<!--end 电缆井-->
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 消防电梯 done-->
+
+
+					<!--电梯井-->
+					<div >
+						<div class="div-c1" style="width:30%">
+							<span style="color:red">*</span>电缆井（多选）:
+						</div>
+						<div class="div-c2" style="width:50%">
+						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="管道并未封堵或不符合要求" />管道并未封堵或不符合要求
+						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="电气线路敷设不符合要求" />电气线路敷设不符合要求
+						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="防火门设置不符合要求" />防火门设置不符合要求
+						    
+						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="其他" />其他
+						</div>
+
+						<div class="div-c3">
+						<input type="text" id="yinhuanDianLanJinOther" name="yinhuanDianLanJinOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 电梯井 done-->
+
 					
 					<div class="form-group">
 						<button type="submit" class="btn btn-info btn-block btn-lg">数据提交</button>
