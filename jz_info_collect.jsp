@@ -26,21 +26,32 @@
 text/css' />
 <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
 
+<style> 
+.div-a{ float:left;display:table-cell;vertical-align: middle;} 
+.div-b{ float:left;display:table-cell;vertical-align: middle;} 
 
+.div-c1{ float:left;width:30%;display:table-cell;vertical-align: middle;} 
+.div-c2{ float:left;width:45%;display:table-cell;vertical-align: middle;} 
+.div-c3{ float:right;width:20%;display:table-cell;vertical-align: middle;} 
+.input-me{
+	border-top-width: 0px;border-left-width: 0px;border-right-width: 0px;
+	font-size: 12pt;background:#f5f5f5;border-bottom: 0px solid #98CBF7;
+}
+
+</style> 
 
 
 </head>
 <body >
 	<%
-		String tempBuildingJsonString = request.getAttribute("buildingList").toString();		
+
+		String tempBuildingJsonString = "";
+		if(null !=request.getAttribute("buildInfo")){
+			tempBuildingJsonString = request.getAttribute("buildInfo").toString();
+	};	
 	%>
 	<script>
-		function ClickAddr(){
-			//$('#p').on('click',function(){
-				console.log($(this).val());
-			//})
- 		}
-
+		
  		$().ready(function (){
  			$("select").select2({
  				tags:true,
@@ -50,7 +61,9 @@ text/css' />
  			});
  			$(".select2-search,.select2-focusser").remove();
 
- 			var buildingjsonarr = eval(<%=tempBuildingJsonString%>);
+ 			var buildingjsonarr = <%=tempBuildingJsonString%>;
+ 			//console.log("AVC  "+buildingjsonarr.length);
+ 			//console.log("AVVC "+buildingjsonarr[0] );
  			var t0="";
  			var t1="";
  			var t2="";
@@ -60,32 +73,12 @@ text/css' />
  			var b_id_arr=[];
 
 
- 			for(var item =0; item < buildingjsonarr.length;item++){
+ 			for(var item in buildingjsonarr){
  				//buildingjsonarr是个array[]，长度是建筑个数,成员是object
  				var item_v = buildingjsonarr[item];
- 				for(var detail in item_v){
-	 				//item_v是一个建筑的object，里面有buildingAddr和buildingId两个成员
-	 				console.log("item="+detail+"  value="+item_v[detail]);
-	 				if("buildingAddr"==detail){
-	 					t2 = item_v[detail];
-	 					b_addr_arr.push(t2);
-	 					index++;
-	 				}
-	 				if("buildingId"==detail){
-	 					t0 = item_v[detail];
-	 					b_id_arr.push(t0);
-	 					t1 = item_v[detail]+"栋";
-	 					index++;
-	 				}
-	 				
-	 				if((index>0)&&(!(index%2))){//index==2,4,6...进入
-	 					//拼出完整的地址+门栋，只有index为偶数才是完整的场景
-	 					var temp = '<p>'+t2+'--'+t1+'</p>';
-	 					//var temp = '<p id=building'+(index/2-1)+'>'+t2+t1+'</p>';
-	 					$("#buildinglist").append(temp); 
-
- 					}
- 				}				
+ 				//item_v是一个建筑的object，里面有buildingAddr和buildingId两个成员
+ 				console.log("item="+item+"  value="+item_v);
+ 								
  			}
  			/* Test OK
  			for(var k in b_addr_arr)
@@ -95,10 +88,9 @@ text/css' />
 			*/
 			//ajax方法只能执行一次，不能重复binding到一个selector
 			//for(var bno=0; bno < b_addr_arr.length; bno++){//这里也不能用循环
-			
+			/*
 				$('#buildinglist').on('click','p',function(){
 					var url = "GetBuildingAction";
-					//下面不能用bno参数，因为这是回调，当点击事件发生时，bno早就变成2了
 					var data = $(this).text();
 					var index = data.indexOf('--');
 					var data1 = data.substring(0,index);
@@ -109,7 +101,7 @@ text/css' />
 						type:"post",
 						async:false,
 						url:url,
-						data:JSON.stringify(senddata),
+						data:senddata,
 						timeout:1000,
 						success:function(resp){
 							console.log("got it " + resp);
@@ -119,11 +111,9 @@ text/css' />
 						}
 					})
 				})
+			*/
 			
-			//}
-
-			
-	 					
+			//}	 					
  	})
 	</script>
 
@@ -135,7 +125,7 @@ text/css' />
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<div  sytle="color:#fff" class="col-xs-6 col-sm-3"><h3>居民信息检查-建筑检查</h3></div>
+			<div  sytle="color:#fff" class=""><h3>建筑信息检查</h3></div>
 		</div>
 		<div class="navbar-collapse collapse move-me">
 			<ul class="nav navbar-nav navbar-right">
@@ -152,202 +142,223 @@ text/css' />
 
  
 <div id="contact-sec"   >
-	   <div class="overlay">
-<div class="container set-pad">
-  <div class="row text-center">
-			 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
-				 <h2 id="buildnametitle" data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >
-				 	<!--TODO：use jquery add content:buildName建筑地址X+第Y门栋号-->				 
-				 </h2>
-				 <h4 data-scroll-reveal="enter from the bottom after 0.3s">
-				  请填写以下每项内容，填写内容对应该小区单独建筑，请按提示进行。
-				  带*号的为必填项。
-				 </h4>
-			 </div>
-		 </div>
-		 <!--/.HEADER LINE END-->
-	  
-	   <div class="row set-row-pad"  data-scroll-reveal="enter from the bottom after 0.5s" >
-
-	   	<div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
-			   <div class="panel-group" id="accordion">
-					<div class="alert alert-info" data-scroll-reveal="enter from the bottom after 0.5s">
-						<div  class="panel-heading" >
-							<h4 class="panel-title">
-								<a id="buildname" data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="collapsed">
-									<!--use jquery add content:buildName建筑名称列表，-->
-									 点击查看建筑列表,选择后可进行数据填写
-
-								</a>
-							</h4>
-						</div>
-						<div id="collapse1" class="panel-collapse collapse" style="height: 0px;">
-							<div id="buildinglist" class="panel-body">
-								
-							</div>
-						</div>
-					</div>	
+	<div class="overlay">
+		<div class="container set-pad">
+			<div class="row text-center">
+				<div class="col-lg-12  col-md-12 col-sm-12">
+					<h2 id="cellnametitle" data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >
+					 	<!--use jquery add content:cellName小区名称-->
+					 	&nbsp;&nbsp;
+					 
+					</h2>
+				 
 				</div>
-	   	</div>
-		 
-			 
-			 
-		   </div>
-	   
-		   
-			 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-				<form 	role = "form" id="zj_info_collect_form" name="zjform" action="test.jsp" method="post">
+
+			</div>
+
+			<div style ="border:0;height:1px;background:#AFAFAF"></div>
+
+		 <!--/.HEADER LINE END-->		   
+			 <div class="col-lg-12  col-md-12 col-sm-12">
+				<form 	role = "form" id="zj_info_collect_form" name="zjform" action="SetBuildAction" method="post">
 					<!--TODO 这里的变量需要修改-->
 					<input id="buildingName" name="buildingName" type="hidden" value=""/>
 					<!--TODO END-->
-					
-					<div class="form-group input-group">
-						<label for="leaveRoad">
-							<h4><span style="color:red">*</span>疏散通道(个):（必填）</h4>
-						</label>			
-						<input type="number" id="leaveRoad" name="leaveRoad" class="form-control "
-						 required="required" />
-					</div>
-					<div class="form-group input-group">
-						<label for="safeLeaveRoad">
-							<h4><span style="color:red">*</span>安全出口(个):（必填）</h4>
-						</label>
-						<input type="number" id="safeLeaveRoad" name="safeLeaveRoad" 
-						class="form-control " required="required" />
-					</div>
-					
-					<div class="form-group input-group">
-						<label for="singleOldPersonCount">
-							<h4><span style="color:red">*</span>独居老人人数:(必填)</h4>
-						</label>				
-						<input type="number" id="singleOldPersonCount" name="singleOldPersonCount" 
-						class="form-control " required="required" />
-					</div>
-					<div class="form-group input-group">
-						<label for="monitorSmokingCount"><h4>独立式感烟探测器(个):（必填）</h4></label>				
-						<input type="number" id="monitorSmokingCount" name="monitorSmokingCount" class="form-control " required="required" />
-					</div>
-					<div class="form-group input-group">
-						<label for="xfss">
-							<h4><span style="color:red">*</span>建筑消防设施:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="xfss" name="xfss" class="js-example-basic-multiple form-control" multiple="multiple" required="required">
-									<option value="室内消火栓系统">室内消火栓系统</option>
-									<option value="自动灭火系统">自动灭火系统</option>
-									<option value="火灾自动报警系统">火灾自动报警系统</option>
-									<option value="防烟和排烟设施">防烟和排烟设施</option>
-									<option value="消防应急照明">消防应急照明</option>
-									<option value="疏散指示标志">疏散指示标志</option>
-									<option value="消防电梯">消防电梯</option>
-									<option value="灭火器">灭火器</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+
+					<div>
+						<div class="div-a">
+							<h4><span style="color:red">*</span>疏散通道(个)&nbsp;&nbsp;:</h4>
+						</div>	
+						<div class="div-b">			
+						<input type="number" id="leaveRoad" name="leaveRoad" class="input-me " style="width:130px;margin-top:2%" required="required"  placeholder="请填入数字" />
 						</div>
-					<!--
-					</div>
-					<div class="form-group input-group">
-					-->
-					<label for="xfssOther"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="xfssOther" name="xfssOther" class="form-control " placeholder="选填，当选择了消防设施的其他项后填写" />
 					</div>
 
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--done-->
+
+					<div>
+						<div class="div-a">
+							<h4><span style="color:red">*</span>安全出口(个)&nbsp;&nbsp;:</h4>
+						</div>	
+						<div class="div-b">			
+						<input type="number" id="safeLeaveRoad" name="safeLeaveRoad" class="input-me " style="width:130px;margin-top:2%" required="required"  placeholder="请填入数字" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--done-->
+					
+					<div>
+						<div class="div-a">
+							<h4><span style="color:red">*</span>独居老人人数&nbsp;&nbsp;:</h4>
+						</div>	
+						<div class="div-b">			
+						<input type="number" id="singleOldPersonCount" name="singleOldPersonCount" class="input-me " style="width:100px;margin-top:2%" required="required"  placeholder="请填入数字" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--done-->
+
+					<div>
+						<div class="div-a">
+							<h4><span style="color:red">*</span>简易喷淋系统(套)&nbsp;&nbsp;:</h4>
+						</div>	
+						<div class="div-b">			
+						<input type="number" id="jyplSystemCount" name="jyplSystemCount" class="input-me " style="width:90px;margin-top:2%" required="required"  placeholder="数字" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--done-->
+
+					<div>
+						<div class="div-a">
+							<h4><span style="color:red">*</span>独立式感烟探测器(个)&nbsp;&nbsp;:</h4>
+						</div>	
+						<div class="div-b">			
+						<input type="number" id="monitorSmokingCount" name="monitorSmokingCount" class="input-me " style="width:90px;margin-top:2%" required="required"  placeholder="数字" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--done-->
+
+
+
+					<div >
+						<div class="div-c1">
+							<h4><span style="color:red">*</span>建筑消防设施（多选）:</h4>
+						</div>
+						<div class="div-c2">
+						    <input type="checkbox" name="xfss" id="xfss" value="室内消火栓系统" />室内消火栓系统
+						    <input type="checkbox" name="xfss" id="xfss" value="自动灭火系统" />
+						    自动灭火系统
+						    <input type="checkbox" name="xfss" id="xfss" value="火灾自动报警系统" />火灾自动报警系统
+						    <input type="checkbox" name="xfss" id="xfss" value="防烟和排烟设施" />防烟和排烟设施
+						    <input type="checkbox" name="xfss" id="xfss" value="消防应急照明" />
+						    消防应急照明
+						    <input type="checkbox" name="xfss" id="xfss" value="疏散指示标志" />
+						    疏散指示标志
+						    <input type="checkbox" name="xfss" id="xfss" value="消防电梯" />消防电梯
+						    <input type="checkbox" name="xfss" id="xfss" value="灭火器" />灭火器
+						    <input type="checkbox" name="xfss" id="xfss" value="其他" />其他
+
+						</div>
+
+						<div class="div-c3">
+						<input type="text" id="xfssOther" name="xfssOther" class="input-me" 
+						placeholder="其他详情" style="width:60px;margin-top:265%;border-bottom: 1px #98CBF7;" required="required" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 建筑消防设施 done-->
+					
+
 					<hr />
-					<h2>主要消防隐患</h2>
+					<h3>主要消防隐患</h3>
 					<hr />
 					<!--安全疏散-->
-					<div class="form-group input-group">
-						<label for="yinhuanSafeLeave">
-							<h4><span style="color:red">*</span>安全疏散（通道、出口、楼梯）:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="yinhuanSafeLeave" name="yinhuanSafeLeave" class="js-example-basic-multiple form-control" multiple="multiple" required="required">
-									<option value="无隐患">无隐患</option>
-									<option value="未设置">未设置</option>
-									<option value="消防通道阻塞">消防通道阻塞</option>
-									<option value="安全出口阻塞或锁闭">安全出口阻塞或锁闭</option>
-									<option value="未设置前室">未设置前室</option>
-									<option value="疏散宽度不足">疏散宽度不足</option>
-									<option value="通向疏散通道、楼梯的防火门未按要求设置">通向疏散通道、楼梯的防火门未按要求设置</option>
-									<option value="灭火器">灭火器</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+					<div >
+						<div class="div-c1" style="width:30%">
+							<span style="color:red">*</span>安全疏散(通道、出口、楼梯)（多选）:
 						</div>
-					<!--
+						<div class="div-c2" style="width:50%">
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="未设置" />
+						    未设置
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="消防通道阻塞" />消防通道阻塞
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="安全出口阻塞或锁闭" />安全出口阻塞或锁闭
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="未设置前室" />
+						    未设置前室
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="疏散宽度不足" />
+						    疏散宽度不足
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="通向疏散通道、楼梯的防火门未按要求设置" />通向疏散通道、楼梯的防火门未按要求设置
+						    
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="其他" />其他
+
+						</div>
+
+						<div class="div-c3">
+						<input type="text" id="yinhuanSafeLeaveOther" name="yinhuanSafeLeaveOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						</div>
 					</div>
-					<div class="form-group input-group">
-					-->
-					<label for="yinhuanSafeLeaveOther"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="yinhuanSafeLeaveOther" name="yinhuanSafeLeaveOther" class="form-control " placeholder="选填，当选择了安全疏散隐患的其他项后填写原因" />
-					</div>
-					<!--安全疏散END-->
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 安全疏散 done-->
+
+
 
 					<!--应急照明-->
-
-					<div class="form-group input-group">
-						<label for="yinhuanYjzmDevice">
-							<h4><span style="color:red">*</span>应急照明:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="yinhuanYjzmDevice" name="yinhuanYjzmDevice" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
-						    style="width:100%">
-									<option value="无隐患">无隐患</option>
-									<option value="未设置">未设置</option>
-									<option value="配置不符合要求">配置不符合要求</option>
-									<option value="损坏">损坏</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+					<div >
+						<div class="div-c1" style="width:30%">
+							<span style="color:red">*</span>应急照明（多选）:
 						</div>
-					<!--
+						<div class="div-c2" style="width:50%">
+						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="配置不符合要求" />配置不符合要求
+						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="损坏" />损坏
+						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="其他" />其他
+						</div>
+
+						<div class="div-c3">
+						<input type="text" id="yinhuanYjzmDeviceOther" name="yinhuanYjzmDeviceOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						</div>
 					</div>
-					<div class="form-group input-group">
-					-->
-					<label for="yinhuanYjzmDeviceOther"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="yinhuanYjzmDeviceOther" name="yinhuanYjzmDeviceOther" class="form-control " placeholder="选填，当选择了应急照明隐患的‘其他’后填写其他原因" />
-					</div>
-					<!--应急照明END-->
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 应急照明 done-->
 
 					<!--疏散指示标志-->
-					<div class="form-group input-group">
-						<label for="yinhuanLeaveItem">
-							<h4><span style="color:red">*</span>疏散指示标志:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="yinhuanLeaveItem" name="yinhuanLeaveItem" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
-						    style="width:100%">
-									<option value="无隐患">无隐患</option>
-									<option value="未设置">未设置</option>
-									<option value="配置不符合要求">配置不符合要求</option>
-									<option value="损坏">损坏</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+					<div >
+						<div class="div-c1" style="width:30%">
+							<span style="color:red">*</span>疏散指示标志（多选）:
 						</div>
-					
-					<label for="yinhuanLeaveItemOther"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="yinhuanLeaveItemOther" name="yinhuanLeaveItemOther" class="form-control " placeholder="选填，当选择了疏散指示标志隐患的‘其他’后填写其他原因" />
+						<div class="div-c2" style="width:50%">
+						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="配置不符合要求" />配置不符合要求
+						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="损坏" />损坏
+						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="其他" />其他
+						</div>
+
+						<div class="div-c3">
+						<input type="text" id="yinhuanLeaveItemOther" name="yinhuanLeaveItemOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						</div>
 					</div>
-					<!--end 疏散指示标志-->
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 疏散指示标志 done-->
 
 					<!--消防给水-->
-					<div class="form-group input-group">
-						<label for="yinhuanXfGiveWater">
-							<h4><span style="color:red">*</span>消防给水:（必选、多选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="yinhuanXfGiveWater" name="yinhuanXfGiveWater" class="js-example-basic-multiple form-control" multiple="multiple" required="required"
-						    style="width:100%">
-									<option value="无隐患">无隐患</option>
-									<option value="未设置">未设置</option>
-									<option value="消防水池或消防水箱无水">消防水池或消防水箱无水</option>
-									<option value="消防水池或消防水箱不能正常使用">消防水池或消防水箱不能正常使用</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
+					<div >
+						<div class="div-c1" style="width:30%">
+							<span style="color:red">*</span>消防给水（多选）:
 						</div>
-					
-					<label for="yinhuanXfGiveWaterOther"><h4>其他:（选填）</h4></label>				
-						<input type="text" id="yinhuanXfGiveWaterOther" name="yinhuanXfGiveWaterOther" class="form-control " placeholder="选填，当选择了上述消防给水隐患的‘其他’后填写其他原因" />
+						<div class="div-c2" style="width:50%">
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="消防水池或消防水箱无水" />消防水池或消防水箱无水
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="消防水池或消防水箱不能正常使用" />消防水池或消防水箱不能正常使用
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="其他" />其他
+						</div>
+
+						<div class="div-c3">
+						<input type="text" id="yinhuanXfGiveWaterOther" name="yinhuanXfGiveWaterOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						</div>
 					</div>
-					<!--end 消防给水-->
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 消防给水 done-->
+
+
 
 					<!--室内消火栓系统-->
 					<div class="form-group input-group">

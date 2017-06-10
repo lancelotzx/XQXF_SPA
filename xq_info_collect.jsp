@@ -76,6 +76,16 @@ text/css' />
  					}
 
  				}
+ 				else if("xiaofangControlRoom"==i
+ 					||"smallXiaofangStation" == i
+ 					||"xiaofangCarRoad" == i
+ 					||"business" == i
+ 					||"dangerThing" == i
+ 					||"autoMobile" == i ){
+ 						$("input:radio[name="+i+"][value="+celljsonarr[i]+"]").attr("checked",true);
+
+
+ 				}
  				else{//若是其他字段，直接通过json的字段名赋值value
  					var obj=$("#"+i);
  					obj.val(celljsonarr[i]);
@@ -226,6 +236,30 @@ text/css' />
 
 					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
 					<!--end社区消防安全管理人->社区民警 done-->
+
+					<div >
+						<div class="div-a">
+							<h4><span style="color:red">*</span>小区消防安全责任人&nbsp;:</h4>
+						</div>
+						<div class="div-b">
+							<input type="text" id="cellZrrPerson" name="cellZrrPerson" class="input-me " required="required"  placeholder="请填写姓名" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end小区消防安全责任人done-->
+
+					<div >
+						<div class="div-a">
+							<h4><span style="color:red">*</span>小区消防安全管理人&nbsp;:</h4>
+						</div>
+						<div class="div-b">
+							<input type="text" id="cellGlrPerson" name="cellGlrPerson" class="input-me " required="required"  placeholder="请填写姓名" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end小区消防安全管理人done-->
 
 					<!-- 所属街道不要了
 					<div class="form-group input-group">
