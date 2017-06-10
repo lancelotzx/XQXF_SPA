@@ -27,15 +27,15 @@ text/css' />
 <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
 
 <style> 
-.div-a{ float:left;width:30%;} 
-.div-b{ float:left;width:68%;} 
+.div-a{ float:left;display:table-cell;vertical-align: middle;} 
+.div-b{ float:left;display:table-cell;vertical-align: middle;} 
 
-.div-c1{ float:left;width:30%;} 
-.div-c2{ float:left;width:33%;} 
-.div-c3{ float:left;width:36%;} 
+.div-c1{ float:left;width:50%;display:table-cell;vertical-align: middle;} 
+.div-c2{ float:left;width:30%;display:table-cell;vertical-align: middle;} 
+.div-c3{ float:left;width:20%;display:table-cell;vertical-align: middle;} 
 .input-me{
 	border-top-width: 0px;border-left-width: 0px;border-right-width: 0px;
-	font-size: 9pt;background:#f5f5f5;border-bottom: 1px solid #98CBF7;
+	font-size: 12pt;background:#f5f5f5;border-bottom: 0px solid #98CBF7;
 }
 
 </style> 
@@ -47,26 +47,62 @@ text/css' />
 		String tempCellJsonString = request.getAttribute("cellBean").toString();		
 	%>
 	<script>
+
  		$().ready(function (){
  			var celljsonarr = eval(<%=tempCellJsonString%>);
- 			for(var i in celljsonarr){
- 				console.log("item="+i+"value="+celljsonarr[i]);
+ 			for(var i in celljsonarr){ 
+ 				console.log("item="+i+"  value="+celljsonarr[i]);
  				if("cellName"==i){//如果是小区名称，那么对strong标签特殊处理
  					$("#cellnametitle").append(celljsonarr[i]);
  					$("#cellName").val(celljsonarr[i]);//提交隐藏字段cellname给后台作为id
  				}
- 				else if("cellAddr" == i){
- 					$("#cellAddr").html("<h5>"+celljsonarr[i]+"</h5>");
+ 				else if("cellAddr" == i
+ 				 || "community" == i
+ 				 ||"leaveRoad" == i
+ 				 ||"safeLeaveRoad" == i
+ 				 ||"singleOldPersonCount" == i
+ 				 ||"jyplSystemCount" == i
+ 				 ||"monitorSmokingDeviceCount" == i
+ 				 ){
+ 					$("#"+i).html("<h4>"+celljsonarr[i]+"</h4>");
+ 				}
+ 				else if("buildNameList" == i){ //建筑列表名字为Addr+'-'+Id,这里进行处理
+ 					var buildingA_I = celljsonarr[i];
+ 					console.log("AVC "+buildingA_I);
+ 					for(var j in buildingA_I)
+ 					{
+ 						$("#buildingAddr_Id").append("<option value="+buildingA_I[j]+">"
+ 							+buildingA_I[j]+"</option>");
+ 					}
+
  				}
  				else{//若是其他字段，直接通过json的字段名赋值value
- 					var obj=$('#'+i);
+ 					var obj=$("#"+i);
  					obj.val(celljsonarr[i]);
  				}
  			}
  			//TODO：所属社区community是下拉框，这里还没有实现
  			
 
- 		})
+ 		});
+
+		
+
+		$(function () { 
+				 		$("#buildingAddr_Id").change(function () {
+				 			var buildingAddr;
+				 			var buildingId;
+				 			var temp = $("#buildingAddr_Id").val();
+				 			var idex = temp.indexOf('-');
+				 			buildingAddr = temp.substring(0,idex);
+				 			buildingId = temp.substring(idex+1,temp.length-1);//去掉栋字
+				 			$("#buildingAddr").val(buildingAddr);
+				 			$("#buildingId").val(buildingId);
+
+
+				      		//$("#xq_info_collect_form").submit();
+				  	 })
+		});
 	</script>
 
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
@@ -125,8 +161,8 @@ text/css' />
 					</div>
 					end mod-->
 					<div>
-						<div class="div-a">
-							<h5>小区地址:</h5>
+						<div class="div-a" style = "">
+							<h4>小区地址:</h4>
 						</div>
 						<div class="div-b" id="cellAddr">
 						</div>
@@ -134,12 +170,22 @@ text/css' />
 					<!--end mod 小区地址-->
 					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
 
+					<div >
+						<div class="div-a"><h4>所属社区:</h4></div>
+						<div class="div-b" id="community">
+						
+						</div>
+					</div>
+					<!--end add 所属社区-->
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+
 					<!--add 小区管理主体-->
 					<div >
-						<div class="div-c1">
-							<h5><span style="color:red">*</span>小区管理主体:</h5>
+						<div class="div-c1" style="width:45%">
+							<h4><span style="color:red">*</span>小区管理主体:</h4>
 						</div>
-						<div class="div-c2">
+						<div class="div-c2" style="width:30%">
 						    <select id="cellGlzt" name="cellGlzt" class="form-control" required="required">
 						    		<option value="" selected="true" disabled="true">请选择
 									</option>
@@ -149,158 +195,246 @@ text/css' />
 						    </select>		  				     	
 						</div>
 						<div class="div-c3">
-						<input type="text" id="cellGlztOther" name="cellGlztOther" class="input-me" placeholder="请填入管理主体名称" required="required" />
+						<input type="text" id="cellGlztOther" name="cellGlztOther" class="input-me" placeholder="请填入管理主体名称" style="width:80px;" required="required" />
 						</div>
 					</div>
 
 					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
-					<!--end add 小区管理主体-->
+					<!--end add 小区管理主体 done-->
+
+					
+					<div>
+						<div class="div-a">
+							<h4><span style="color:red">*</span>社区消防安全责任人  :</h4>
+						</div>
+						<div class="div-b" >
+							<input type="text" id="communityZrrPerson" name="communityZrrPerson" class="input-me" required="required"  placeholder="请填写姓名" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end社区消防安全责任人 done-->
 
 					<div >
-						<label for="sssq"><h4>所属社区:(若显示不符合请修改为正确名称)</h4></label>
-						<input type="text" id="community" name="community" class="form-control"  required="required" placeholder="请核对并填写小区所属社区名" />
+						<div class="div-a">
+							<h4><span style="color:red">*</span>社区民警&nbsp;&nbsp;:</h4>
+						</div>
+						<div class="div-b">
+							<input type="text" id="communityGlrPerson" name="communityGlrPerson" class="input-me " required="required"  placeholder="请填写姓名" />
+						</div>
 					</div>
-					<!--end add 所属社区-->
-					<div class="form-group input-group">
-						<label for="sqxfaqzzr">
-							<h4><span style="color:red">*</span>社区消防安全责任人:</h4>
-						</label>
-						<input type="text" id="communityZrrPerson" name="communityZrrPerson" class="form-control " required="required"  placeholder="请填写社区消防安全责任人姓名" />
-					</div>
-					<div class="form-group input-group">
-						<label for="sqxfaqglr">
-							<h4><span style="color:red">*</span>社区消防安全管理人:</h4>
-						</label>
-						<input type="text" id="communityGlrPerson" name="communityGlrPerson" class="form-control " required="required"  placeholder="请填写社区消防安全管理人姓名" />
-					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end社区消防安全管理人->社区民警 done-->
+
+					<!-- 所属街道不要了
 					<div class="form-group input-group">
 						<label for="ssjdbsc">
 							<h4>所属街道办事处:（只读）</h4>
 						</label>
 						<input type="text" id="street" name="street" class="form-control " readonly="true" />
 					</div>
-					<div class="form-group input-group">
-						<label for="jzslless9">
-							<h4><span style="color:red">*</span>小区建筑数量(9层及以下):(请填入数字)</h4>
-						</label>				
-						<input type="number" id="buildingCountLess9" name="buildingCountLess9" class="form-control " required="required"  placeholder="小区内9层及以下的建筑总数" />
-					</div>
-					<div class="form-group input-group">
-						<label for="jzsl10to33">
-							<h4><span style="color:red">*</span>建筑数量(10到33层):（请填入数字）</h4>
-						</label>				
-						<input type="number" id="buildingCount10_33" name="buildingCount10_33" class="form-control " required="required"  placeholder="小区内10到33层的建筑总数" />
-					</div>
-					<div class="form-group input-group">
-						<label for="jzsl33more">
-							<h4><span style="color:red">*</span>建筑数量(33层以上):</h4>
-						</label>				
-						<input type="number" id="buildingCountMore34" name="buildingCountMore34" class="form-control " required="required"  placeholder="小区内33层以上的建筑总数" />
-					</div>
-					<div class="form-group input-group">
-						<label for="xfkzs_yn">
-							<h4><span style="color:red">*</span>是否有消防控制室:</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="xiaofangControlRoom" name="xiaofangControlRoom" class="form-control" required="required">
-						    		<option value="" selected="true" disabled="true">请选择
-									</option>
-									<option value="有">有</option>
-									<option value="无">无</option>
-						    </select>		  				     	
+					-->
+					<div>
+						<div class="div-a">
+							<h4><span style="color:red">*</span>小区建筑数量(9层及以下)    :</h4>
+						</div>	
+						<div class="div-b">			
+						<input type="number" id="buildingCountLess9" name="buildingCountLess9" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
 						</div>
 					</div>
-					<div class="form-group input-group">
-						<label for="wxxfz_yn">
-							<h4><span style="color:red">*</span>是否有微型消防站:</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="smallXiaofangStation" name="smallXiaofangStation" class="form-control" required="required">
-						    		<option value="" selected="true" disabled="true">请选择
-									</option>
-									<option value="有">有</option>
-									<option value="无">无</option>
-						    </select>		  				     	
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--done-->
+
+					<div>
+						<div class="div-a">
+							<h4><span style="color:red">*</span>小区建筑数量(10到33层)    :</h4>
+						</div>	
+						<div class="div-b">			
+						<input type="number" id="buildingCount10_33" name="buildingCount10_33" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
 						</div>
 					</div>
-					<div class="form-group input-group">
-						<label for="xfcd_yn">
-							<h4><span style="color:red">*</span>是否有消防车道:</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="xiaofangCarRoad" name="xiaofangCarRoad" class="form-control" required="required">
-						    		<option value="" selected="true" disabled="true">请选择
-									</option>
-									<option value="有">有</option>
-									<option value="无">无</option>
-						    </select>		  				     	
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--done-->
+
+					<div>
+						<div class="div-a">
+							<h4><span style="color:red">*</span>小区建筑数量(33层以上)    :</h4>
+						</div>	
+						<div class="div-b">			
+						<input type="number" id="buildingCountMore34" name="buildingCountMore34" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--done-->
+
+					
+					
+					<div >
+						<div class="div-a">
+							<h4><span style="color:red">*</span>是否有消防控制室:&nbsp;&nbsp;</h4>
+						</div>
+						<div class="div-b" style="width:30%">
+							<h4><input type="radio" name="xiaofangControlRoom" id="xiaofangControlRoom" value="有" required="required"／>有</h4>
+							<h4><input type="radio" name="xiaofangControlRoom" id="xiaofangControlRoom" value="无" required="required"／>无</h4>
+						    		  				     	
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--done-->
+
+					<div >
+						<div class="div-a">
+							<h4><span style="color:red">*</span>是否有微型消防站:&nbsp;&nbsp;</h4>
+						</div>
+						<div class="div-b" style="width:30%">
+							<h4><input type="radio" name="smallXiaofangStation" id="smallXiaofangStation" value="有" required="required"／>有</h4>
+							<h4><input type="radio" name="smallXiaofangStation" id="smallXiaofangStation" value="无" required="required"／>无</h4>
+						    		  				     	
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--微型消防站done-->
+
+					<div >
+						<div class="div-a">
+							<h4><span style="color:red">*</span>是否有消防车道:&nbsp;&nbsp;</h4>
+						</div>
+						<div class="div-b" style="width:30%">
+							<h4><input type="radio" name="xiaofangCarRoad" id="xiaofangCarRoad" value="有" required="required"／>有</h4>
+							<h4><input type="radio" name="xiaofangCarRoad" id="xiaofangCarRoad" value="无" required="required"／>无</h4>
+						    		  				     	
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--消防车道done-->
+
+					
+					<div >
+						<div class="div-a"><h4>疏散通道(个)&nbsp;&nbsp;:</h4></div>
+						<div class="div-b" id="leaveRoad" name="leaveRoad">						
 						</div>
 					</div>
 					
-					<div class="form-group input-group">
-						<label for="sstd"><h4>疏散通道(个):（只读，请在建筑表格中填写）</h4></label>			
-						<input type="text" id="leaveRoad" name="leaveRoad" class="form-control "
-						 readonly="true" />
-					</div>
-					<div class="form-group input-group">
-						<label for="aqck"><h4>安全出口(个): （只读，请在建筑表格中填写</h4></label>
-						<input type="text" id="safeLeaveRoad" name="safeLeaveRoad" class="form-control " 
-						readonly="true" />
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+
+					<!--end add 疏散通道-->
+
+					<div >
+						<div class="div-a"><h4>安全出口(个)&nbsp;&nbsp;:</h4></div>
+						<div class="div-b" id="safeLeaveRoad" name="safeLeaveRoad">						
+						</div>
 					</div>
 					
-					<div class="form-group input-group">
-						<label for="syczqk_yn">
-							<h4><span style="color:red">*</span>商业出租情况:(必选)</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="business" name="business" class="form-control" required="
-						    required">
-						    		<option value="" selected="true" disabled="true">请选择
-									</option>
-									<option value="有">有</option>
-									<option value="无">无</option>
-						    </select>		  				     	
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+
+					<!--end add 安全出口-->
+
+					<div >
+						<div class="div-a"><h4>独居老人个数&nbsp;&nbsp;:</h4></div>
+						<div class="div-b" id="singleOldPersonCount" name="singleOldPersonCount">						
 						</div>
 					</div>
-					<div class="form-group input-group">
-						<label for="djlrrs"><h4>独居老人人数:(只读，从建筑页面提交)</h4></label>				
-						<input type="text" id="singleOldPersonCount" name="singleOldPersonCount" class="form-control " readonly="true" />
-					</div>
-					<div class="form-group input-group">
-						<label for="_yn"><h4><span style="color:red">*</span>危险物品储存:（必选）</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="dangerThing" name="dangerThing" class="form-control" 
-						    required="required">
-						    		<option value="" selected="true" disabled="true">请选择
-									</option>
-									<option value="有">有</option>
-									<option value="无">无</option>
-						    </select>		  				     	
+					
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+
+					<!--end add 独居老人个数-->
+
+					<div >
+						<div class="div-a"><h4>简易喷淋系统(套)&nbsp;&nbsp;:</h4></div>
+						<div class="div-b" id="jyplSystemCount" name="jyplSystemCount">						
 						</div>
 					</div>
-					<div class="form-group input-group">
-						<label for="dlsgytcq"><h4>独立式感烟探测器(个):（只读）</h4></label>				
-						<input type="text" id="monitorSmokingDeviceCount" name="monitorSmokingDeviceCount" class="form-control " readonly="true" />
-					</div>
-					<div class="form-group input-group">
-						<label for="ddc_yn">
-							<h4><span style="color:red">*</span>电动车集中存放:(必选)</h4>
-						</label>
-						<div class="form-group input-group">
-						    <select id="autoMobile" name="autoMobile" class="form-control" required="
-						    required">
-						    		<option value="" selected="true" disabled="true">请选择
-									</option>
-									<option value="集中存放，并有充电装置">集中存放，并有充电装置</option>
-									<option value="集中存放，无充电装置"> 集中存放，无充电装置</option>
-									<option value="无集中存放点">无集中存放点</option>
-						    </select>		  				     	
+					
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+
+					<!--end add 简易喷淋系统-->
+
+					<div >
+						<div class="div-a"><h4>独立式感烟探测器(个)&nbsp;&nbsp;:</h4></div>
+						<div class="div-b" id="monitorSmokingDeviceCount" name="monitorSmokingDeviceCount">						
 						</div>
 					</div>
+					
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+
+					<!--end add 独立式感烟探测器-->
+
+					<div >
+						<div class="div-a">
+							<h4><span style="color:red">*</span>商业出租情况:&nbsp;&nbsp;</h4>
+						</div>
+						<div class="div-b" style="width:30%">
+							<h4><input type="radio" name="business" id="business" value="有" required="required"／>有</h4>
+							<h4><input type="radio" name="business" id="business" value="无" required="required"／>无</h4>
+						    		  				     	
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--商业出租情况done-->
+
+					<div >
+						<div class="div-a">
+							<h4><span style="color:red">*</span>危险物品储存:&nbsp;&nbsp;</h4>
+						</div>
+						<div class="div-b" style="width:30%">
+							<h4><input type="radio" name="dangerThing" id="dangerThing" value="有" required="required"／>有</h4>
+							<h4><input type="radio" name="dangerThing" id="dangerThing" value="无" required="required"／>无</h4>
+						    		  				     	
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--危险物品储存done-->
+
+					<div >
+						<div class="div-a">
+							<h4><span style="color:red">*</span>电动车集中存放:&nbsp;&nbsp;</h4>
+						</div>
+						<div class="div-b" style="">
+							<h4><input type="radio" name="autoMobile" id="autoMobile" value="集中存放，并有充电装置" required="required"／>集中存放，并有充电装置</h4>
+							<h4><input type="radio" name="autoMobile" id="autoMobile" value="集中存放，无充电装置" required="required"／>集中存放，无充电装置</h4>
+							<h4><input type="radio" name="autoMobile" id="autoMobile" value="无集中存放点" required="required"／>无集中存放点</h4>
+
+						    		  				     	
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--电动车集中存放done-->
+
+					<!--add 小区建筑选择-->
+					<div >
+						<div class="div-a">
+							<h4><span style="color:red">*</span>请选择本小区待排查建筑:</h4>
+						</div>
+						<div class="div-b">
+						    <select id="buildingAddr_Id" name="buildingAddr_Id" class="form-control" required="required">
+						    		<option value="" selected="true" disabled="true">请选择
+									</option>
+									
+						    </select>	
+						    <input id="buildingAddr" name="buildingAddr" value="" type="hidden" />
+						    <input id="buildingId" name="buildingId" value="" type="hidden">	  				     	
+						</div>
+						
+					</div>
+					<!--小区建筑选择end-->
 					
 					<div class="form-group">
-						<button type="submit" class="btn btn-info btn-block btn-lg">数据提交</button>
+						<button id="xq_submit" type="submit" class="btn btn-info btn-block btn-lg">数据提交</button>
 					</div>
 
 				</form>
