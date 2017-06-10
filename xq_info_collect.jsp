@@ -26,7 +26,19 @@
 text/css' />
 <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
 
+<style> 
+.div-a{ float:left;width:30%;} 
+.div-b{ float:left;width:68%;} 
 
+.div-c1{ float:left;width:30%;} 
+.div-c2{ float:left;width:33%;} 
+.div-c3{ float:left;width:36%;} 
+.input-me{
+	border-top-width: 0px;border-left-width: 0px;border-right-width: 0px;
+	font-size: 9pt;background:#f5f5f5;border-bottom: 1px solid #98CBF7;
+}
+
+</style> 
 
 
 </head>
@@ -36,13 +48,15 @@ text/css' />
 	%>
 	<script>
  		$().ready(function (){
- 			$("#sel_menu").select2();
  			var celljsonarr = eval(<%=tempCellJsonString%>);
  			for(var i in celljsonarr){
  				console.log("item="+i+"value="+celljsonarr[i]);
  				if("cellName"==i){//如果是小区名称，那么对strong标签特殊处理
  					$("#cellnametitle").append(celljsonarr[i]);
  					$("#cellName").val(celljsonarr[i]);//提交隐藏字段cellname给后台作为id
+ 				}
+ 				else if("cellAddr" == i){
+ 					$("#cellAddr").html("<h5>"+celljsonarr[i]+"</h5>");
  				}
  				else{//若是其他字段，直接通过json的字段名赋值value
  					var obj=$('#'+i);
@@ -63,11 +77,11 @@ text/css' />
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<div  sytle="color:#fff" class="col-xs-6 col-sm-3"><h3>居民信息检查</h3></div>
+			<div  sytle="color:#fff"><h3>居民信息检查</h3></div>
 		</div>
 		<div class="navbar-collapse collapse move-me">
 			<ul class="nav navbar-nav navbar-right">
-				<li ><a href=""><h3>填写检查</h3></a></li>
+				<li ><a href=""><h3>本小区填写检查</h3></a></li>
 				<li ><a href="index.jsp"><h3>进入首页</h3></a></li>
 
 			</ul>
@@ -84,60 +98,69 @@ text/css' />
 <div id="contact-sec"   >
 	   <div class="overlay">
 <div class="container set-pad">
-  <div class="row text-center">
-			 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
-				 <h2 id="cellnametitle" data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >
-				 	<!--use jquery add content:cellName小区名称-->
-				 
-				 </h2>
-				 <h4 data-scroll-reveal="enter from the bottom after 0.3s">
-				  请填写以下每项内容，填写内容按提示进行。
-				  带*号的为必填项。
-				 </h4>
-			 </div>
-
-		 </div>
-		 <!--/.HEADER LINE END-->
-	  
-	   <div class="row set-row-pad"  data-scroll-reveal="enter from the bottom after 0.5s" >
-
-	   	<div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
-			   <div class="panel-group" id="accordion">
-					<div class="alert alert-info" data-scroll-reveal="enter from the bottom after 0.5s">
-						<div  class="panel-heading" >
-							<h4 class="panel-title">
-								<a id="buildname" data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="collapsed">
-									<!--use jquery add content:buildName建筑名称列表-->
-								</a>
-							</h4>
-						</div>
-						<div id="collapse1" class="panel-collapse collapse" style="height: 0px;">
-							<div class="panel-body">
-								<c:forEach items="${buildList}" var="buildingname">
-								<p> ${buildingname}</p>
-								</c:forEach>
-							</div>
-						</div>
-					</div>	
-				</div>
-	   </div>
+	<div class="row text-center">
+		<div class="col-lg-12  col-md-12 col-sm-12">
+			<h2 id="cellnametitle" data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >
+			 	<!--use jquery add content:cellName小区名称-->
+			 
+			</h2>
 		 
-			 
-			 
-		   </div>
+		</div>
+
+	</div>
+	<div style ="border:0;height:1px;background:#AFAFAF"></div>
+		 <!--/.HEADER LINE END-->
+	
+		 <!--/.HEADER LINE END-->
+	 
 	   
 		   
-			 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+			 <div class="col-lg-12  col-md-12  col-sm-12">
 				<form 	role = "form" id="xq_info_collect_form" name="xqform" action="SetCellAction" method="post">
 					<input id="cellName" name="cellName" type="hidden" value=""/>
+					<!--下面这个地方修改了，和dzf确认
 					<div class="form-group input-group">
-						<label for="xqdz"><h4>小区地址:(只读)</h4></label>
+						<label class="form-label" for="xqdz"><h4>小区地址列表:</h4></label>
 						<input type="text" id="cellAddr" name="cellAddr" class="form-control"  readonly="true" />
 					</div>
-					<div class="form-group input-group">
+					end mod-->
+					<div>
+						<div class="div-a">
+							<h5>小区地址:</h5>
+						</div>
+						<div class="div-b" id="cellAddr">
+						</div>
+					</div>
+					<!--end mod 小区地址-->
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+
+					<!--add 小区管理主体-->
+					<div >
+						<div class="div-c1">
+							<h5><span style="color:red">*</span>小区管理主体:</h5>
+						</div>
+						<div class="div-c2">
+						    <select id="cellGlzt" name="cellGlzt" class="form-control" required="required">
+						    		<option value="" selected="true" disabled="true">请选择
+									</option>
+									<option value="物业服务企业">物业服务企业</option>
+									<option value="居民委员会">居民委员会</option>
+									<option value="其他">其他</option>
+						    </select>		  				     	
+						</div>
+						<div class="div-c3">
+						<input type="text" id="cellGlztOther" name="cellGlztOther" class="input-me" placeholder="请填入管理主体名称" required="required" />
+						</div>
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 小区管理主体-->
+
+					<div >
 						<label for="sssq"><h4>所属社区:(若显示不符合请修改为正确名称)</h4></label>
 						<input type="text" id="community" name="community" class="form-control"  required="required" placeholder="请核对并填写小区所属社区名" />
 					</div>
+					<!--end add 所属社区-->
 					<div class="form-group input-group">
 						<label for="sqxfaqzzr">
 							<h4><span style="color:red">*</span>社区消防安全责任人:</h4>
@@ -281,6 +304,7 @@ text/css' />
 					</div>
 
 				</form>
+				</div>
 			</div>
 
 			   

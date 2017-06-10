@@ -63,7 +63,7 @@ text/css' />
 </div>
 
   <!--NAVBAR SECTION END-->
-<div class="home-sec" id="home" >
+<div class="" id="home" >
 <div class="overlay">
 <div class="container">
 	   <div class="row text-center " >
@@ -82,7 +82,7 @@ text/css' />
 						   <div class="row" >
 						   
 							   
-								 <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.4s">
+								 <div class="col-lg-12  col-md-12 col-sm-12" data-scroll-reveal="enter from the bottom after 0.4s">
 								 	
 									<div class="about-div">
 										<p >
@@ -104,7 +104,7 @@ text/css' />
 								   
 								<input type="hidden" id="latd" name="latd" value="" />
 								<input type="hidden" id="lng"  name="lng"  value="" />
-
+								
 							   	<button type="button" id="GPSshow" class="btn btn-info  btn-lg" >
 							   	开始填写</button>
 								
