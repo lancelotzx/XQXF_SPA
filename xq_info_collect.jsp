@@ -49,7 +49,7 @@ text/css' />
 	<script>
 
  		$().ready(function (){
- 			
+
  			var celljsonarr = eval(<%=tempCellJsonString%>);
  			for(var i in celljsonarr){ 
  				console.log("item="+i+"  value="+celljsonarr[i]);
@@ -128,8 +128,7 @@ text/css' />
 		</div>
 		<div class="navbar-collapse collapse move-me">
 			<ul class="nav navbar-nav navbar-right">
-				<li ><a href=""><h3>本小区填写检查</h3></a></li>
-				<li ><a href="index.jsp"><h3>进入首页</h3></a></li>
+				<li ><a href="GoToIndexAction"><h3>回到首页</h3></a></li>
 
 			</ul>
 		</div>
