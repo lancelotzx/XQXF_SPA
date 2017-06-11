@@ -29,6 +29,8 @@ text/css' />
 type='text/css'/>
 <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
 
+<script src="http://cdn.bootcss.com/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+
 <style> 
 .div-a{ float:left;display:table-cell;vertical-align: middle;} 
 .div-b{ float:left;display:table-cell;vertical-align: middle;} 
@@ -62,8 +64,44 @@ type='text/css'/>
 	%>
 	<script>
 
+		$.validator.setDefaults({  
+    		submitHandler: function() { alert("submitted!");return false; }  
+		}); 
+
 	
  		$().ready(function (){
+
+ 			$("#zj_info_collect_form").validate({
+ 				rules:{
+ 					yinhuanSafeLeave:"required",
+ 					xfss: "required" ,
+ 				yinhuanYjzmDevice:"required" ,
+ 				yinhuanLeaveItem:"required" ,
+ 				yinhuanXfGiveWater:"required" ,
+ 				yinhuanInnerKillFireSystem:"required" ,
+ 				yinhuanAutoKillFireSystem:"required" ,
+ 				yinhuanFireAutoReportSystem:"required" ,
+ 				yinhuanFilterSmokeSystem:"required" ,
+ 				yinhuanXfDianTi:"required" ,
+ 				yinhuanDianLanJin:"required" ,
+
+ 				},
+ 				messages:{
+ 					xfss:"请选择至少一项"
+ 					yinhuanSafeLeave:"请选择至少一项"
+ 				},
+ 				showErrors: function(errorMap, errorList) {  
+		            var msg = "";  
+		            $.each( errorList, function(i,v){  
+		              msg += (v.message+"\r\n");  
+		            });  
+		            if(msg!="") alert(msg);  
+		        	},  
+		        	/* 失去焦点时不验证 */ 
+        		onfocusout: false
+	 		});
+ 			
+
 
  			$('input').iCheck({
  				checkboxClass:'icheckbox_flat-blue'
@@ -117,7 +155,7 @@ type='text/css'/>
  					||"yinhuanXfGiveWaterOther"==item
  					||"yinhuanInnerKillFireSystemOther"==item
  					||"yinhuanAutoKillFireSystemOther"==item
- 					||"yinhuanFilterSmokeSystemOther"==item
+ 					||"yinhuanFireAutoReportSystemOther"==item
  					||"yinhuanFilterSmokeSystemOther"==item
  					||"yinhuanXfDianTiOther"==item
  					||"yinhuanDianLanJinOther"==item){//简单的input字段
@@ -374,7 +412,7 @@ type='text/css'/>
 		</div>
 		<div class="navbar-collapse collapse move-me">
 			<ul class="nav navbar-nav navbar-right">
-				<li ><a href=""><h3>检查该小区建筑填写情况</h3></a></li>
+				<li ><a href="GoToIndexAction"><h3>回到首页</h3></a></li>
 			</ul>
 		</div>
 	   
