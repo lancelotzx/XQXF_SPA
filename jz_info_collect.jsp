@@ -65,7 +65,7 @@ type='text/css'/>
 	<script>
 
 		$.validator.setDefaults({  
-    		submitHandler: function() { alert("submitted!");return false; }  
+    		//submitHandler: function() { alert("submitted!");return false; }  
 		}); 
 
 	
@@ -83,12 +83,21 @@ type='text/css'/>
  				yinhuanFireAutoReportSystem:"required" ,
  				yinhuanFilterSmokeSystem:"required" ,
  				yinhuanXfDianTi:"required" ,
- 				yinhuanDianLanJin:"required" ,
+ 				yinhuanDianLanJin:"required" 
 
  				},
  				messages:{
- 					xfss:"请选择至少一项"
- 					yinhuanSafeLeave:"请选择至少一项"
+ 					yinhuanSafeLeave:"请至少选择一项",
+ 					xfss: "请至少选择一项" ,
+	 				yinhuanYjzmDevice:"请至少选择一项" ,
+	 				yinhuanLeaveItem:"请至少选择一项" ,
+	 				yinhuanXfGiveWater:"请至少选择一项" ,
+	 				yinhuanInnerKillFireSystem:"请至少选择一项" ,
+	 				yinhuanAutoKillFireSystem:"请至少选择一项" ,
+	 				yinhuanFireAutoReportSystem:"请至少选择一项" ,
+	 				yinhuanFilterSmokeSystem:"请至少选择一项" ,
+	 				yinhuanXfDianTi:"请至少选择一项" ,
+	 				yinhuanDianLanJin:"请至少选择一项" 
  				},
  				showErrors: function(errorMap, errorList) {  
 		            var msg = "";  
