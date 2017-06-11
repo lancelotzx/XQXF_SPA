@@ -97,18 +97,211 @@ type='text/css'/>
  					||"singleOldPersonCount"==item
  					||"jyplSystemCount"==item
  					||"monitorSmokingCount"==item){//简单的input字段
- 					var obj=$("#"+i);
+ 					var obj=$("#"+item);
  					obj.val(item_v);
  				}
  								
  			}
 
- 			$("#input:checkbox[name='yinhuanSafeLeave'][value='无隐患']").
+ 			/*把check的id设置为标志+中文value,
+ 			/*e.g:yinhuanSafeLeave无隐患
+ 			/*e.g:yinhuanSafeLeave未设置
+ 			/*开发功能1:无隐患点击后，其他点击项清空；
+ 			／*        点击其他项后，无隐患项清空。
+ 					   即：无隐患项和其他项是互斥关系。
+ 			 API1:判断一个checkox项是否选中：$('#yinhuanSafeLeave未设置').is(':checked'))
+ 			 API2:选中事件$("#yinhuanSafeLeave无隐患").on('ifChecked',function(event){XXXX})
+ 			*/
+ 			
+ 			var yinhuan_arr=new Array(
+ 				"yinhuanSafeLeave",
+ 				"yinhuanYjzmDevice",
+ 				"yinhuanLeaveItem",
+ 				"yinhuanXfGiveWater",
+ 				"yinhuanInnerKillFireSystem",
+ 				"yinhuanAutoKillFireSystem",
+ 				"yinhuanFireAutoReportSystem",
+ 				"yinhuanFilterSmokeSystem",
+ 				"yinhuanXfDianTi",
+ 				"yinhuanDianLanJin"
+ 				);
+			
+ 			$("#yinhuanSafeLeave无隐患").//选择无隐患后，其他项清空
  			on('ifChecked',function(event){
- 					console.log('checked');
- 			});
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='yinhuanSafeLeave'][id != 'yinhuanSafeLeave无隐患']")
+ 					.iCheck("uncheck");
+			});
 
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='yinhuanSafeLeave'][id != 'yinhuanSafeLeave无隐患']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanSafeLeave无隐患").iCheck("uncheck");
+			});
+			
+ 			
+ 			$("#yinhuanYjzmDevice无隐患").//选择无隐患后，其他项清空
+ 			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='yinhuanYjzmDevice'][id != 'yinhuanYjzmDevice无隐患']")
+ 					.iCheck("uncheck");
+			});
 
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='yinhuanYjzmDevice'][id != 'yinhuanYjzmDevice无隐患']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanYjzmDevice无隐患").iCheck("uncheck");
+			});
+
+			//yinhuanLeaveItem
+			$("#yinhuanLeaveItem无隐患").//选择无隐患后，其他项清空
+ 			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='yinhuanLeaveItem'][id != 'yinhuanLeaveItem无隐患']")
+ 					.iCheck("uncheck");
+			});
+
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='yinhuanLeaveItem'][id != 'yinhuanLeaveItem无隐患']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanLeaveItem无隐患").iCheck("uncheck");
+			});
+			
+
+			//yinhuanXfGiveWater
+			$("#yinhuanXfGiveWater无隐患").//选择无隐患后，其他项清空
+ 			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='yinhuanXfGiveWater'][id != 'yinhuanXfGiveWater无隐患']")
+ 					.iCheck("uncheck");
+			});
+
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='yinhuanXfGiveWater'][id != 'yinhuanXfGiveWater无隐患']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanXfGiveWater无隐患").iCheck("uncheck");
+			});
+ 			
+ 			//yinhuanInnerKillFireSystem
+ 			$("#yinhuanInnerKillFireSystem无隐患").//选择无隐患后，其他项清空
+ 			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='yinhuanInnerKillFireSystem'][id != 'yinhuanInnerKillFireSystem无隐患']")
+ 					.iCheck("uncheck");
+			});
+
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='yinhuanInnerKillFireSystem'][id != 'yinhuanInnerKillFireSystem无隐患']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanInnerKillFireSystem无隐患").iCheck("uncheck");
+			});
+
+			//yinhuanAutoKillFireSystem
+			//"yinhuanFireAutoReportSystem",
+ 			//	"yinhuanFilterSmokeSystem",
+ 			//	"yinhuanXfDianTi",
+ 			//	"yinhuanDianLanJin"
+ 			$("#yinhuanAutoKillFireSystem无隐患").//选择无隐患后，其他项清空
+ 			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='yinhuanAutoKillFireSystem'][id != 'yinhuanAutoKillFireSystem无隐患']")
+ 					.iCheck("uncheck");
+			});
+
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='yinhuanAutoKillFireSystem'][id != 'yinhuanAutoKillFireSystem无隐患']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanAutoKillFireSystem无隐患").iCheck("uncheck");
+			});
+
+			//yinhuanFireAutoReportSystem
+
+			$("#yinhuanFireAutoReportSystem无隐患").//选择无隐患后，其他项清空
+ 			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='yinhuanFireAutoReportSystem'][id != 'yinhuanFireAutoReportSystem无隐患']")
+ 					.iCheck("uncheck");
+			});
+
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='yinhuanFireAutoReportSystem'][id != 'yinhuanFireAutoReportSystem无隐患']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanFireAutoReportSystem无隐患").iCheck("uncheck");
+			});
+
+			//yinhuanFilterSmokeSystem
+			$("#yinhuanFilterSmokeSystem无隐患").//选择无隐患后，其他项清空
+ 			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='yinhuanFilterSmokeSystem'][id != 'yinhuanFilterSmokeSystem无隐患']")
+ 					.iCheck("uncheck");
+			});
+
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='yinhuanFilterSmokeSystem'][id != 'yinhuanFilterSmokeSystem无隐患']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanFilterSmokeSystem无隐患").iCheck("uncheck");
+			});
+
+			//yinhuanXfDianTi
+			$("#yinhuanXfDianTi无隐患").//选择无隐患后，其他项清空
+ 			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='yinhuanXfDianTi'][id != 'yinhuanXfDianTi无隐患']")
+ 					.iCheck("uncheck");
+			});
+
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='yinhuanXfDianTi'][id != 'yinhuanXfDianTi无隐患']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanXfDianTi无隐患").iCheck("uncheck");
+			});
+
+			//yinhuanDianLanJin
+			$("#yinhuanDianLanJin无隐患").//选择无隐患后，其他项清空
+ 			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='yinhuanDianLanJin'][id != 'yinhuanDianLanJin无隐患']")
+ 					.iCheck("uncheck");
+			});
+
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='yinhuanDianLanJin'][id != 'yinhuanDianLanJin无隐患']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanDianLanJin无隐患").iCheck("uncheck");
+			});
+
+			
  			/* Test OK
  			for(var k in b_addr_arr)
  				console.log(b_addr_arr[k]);
@@ -319,30 +512,30 @@ type='text/css'/>
 						<div class="div-b" style="width:55%">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="无隐患" onclick="checkbox_check(this)" />无隐患
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave无隐患" value="无隐患"  />无隐患
 							</li>
 							<li>
-						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave未设置" value="未设置" />未设置
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="消防通道阻塞" />消防通道阻塞
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave消防通道阻塞" value="消防通道阻塞" />消防通道阻塞
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="安全出口阻塞或锁闭" />安全出口阻塞或锁闭
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave安全出口阻塞或锁闭" value="安全出口阻塞或锁闭" />安全出口阻塞或锁闭
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="未设置前室" />
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave未设置前室" value="未设置前室" />
 						    未设置前室
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="疏散宽度不足" />
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave疏散宽度不足" value="疏散宽度不足" />
 						    疏散宽度不足
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="通向疏散通道、楼梯的防火门未按要求设置" />通向疏散通道、楼梯的防火门未按要求设置
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave通向疏散通道、楼梯的防火门未按要求设置" value="通向疏散通道、楼梯的防火门未按要求设置" />通向疏散通道、楼梯的防火门未按要求设置
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="其他" />其他
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave其他" value="其他" />其他
 						    <input type="text" id="yinhuanSafeLeaveOther" name="yinhuanSafeLeaveOther" class="input-me" 
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"/>
 						    </li>
@@ -363,19 +556,19 @@ type='text/css'/>
 						<div class="div-b">
 						<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice无隐患" value="无隐患" />无隐患
 							</li>
 							<li>
-						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice未设置" value="未设置" />未设置
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="配置不符合要求" />配置不符合要求
+						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice配置不符合要求" value="配置不符合要求" />配置不符合要求
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="损坏" />损坏
+						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice损坏" value="损坏" />损坏
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="其他" />其他
+						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice其他" value="其他" />其他
 						    <input type="text" id="yinhuanYjzmDeviceOther" name="yinhuanYjzmDeviceOther" class="input-me" 
 						placeholder="其他详情" style="width:70px;border-bottom: 1px #98CBF7;" />
 						    </li>
@@ -395,19 +588,19 @@ type='text/css'/>
 						<div class="div-b">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem无隐患" value="无隐患" />无隐患
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem未设置" value="未设置" />未设置
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="配置不符合要求" />配置不符合要求
+						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem配置不符合要求" value="配置不符合要求" />配置不符合要求
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="损坏" />损坏
+						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem损坏" value="损坏" />损坏
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="其他" />其他
+						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem其他" value="其他" />其他
 						    <input type="text" id="yinhuanLeaveItemOther" name="yinhuanLeaveItemOther" class="input-me" 
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"  />
 						    </li>
@@ -427,20 +620,20 @@ type='text/css'/>
 						<div class="div-b" style="width:55%">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater无隐患" value="无隐患" />无隐患
 						     </li>
 							<li>
 
-						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater未设置" value="未设置" />未设置
 						     </li>
 							<li>
-						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="消防水池或消防水箱无水" />消防水池或消防水箱无水
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater消防水池或消防水箱无水" value="消防水池或消防水箱无水" />消防水池或消防水箱无水
 						     </li>
 							<li>
-						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="消防水池或消防水箱不能正常使用" />消防水池或消防水箱不能正常使用
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater消防水池或消防水箱不能正常使用" value="消防水池或消防水箱不能正常使用" />消防水池或消防水箱不能正常使用
 						     </li>
 							<li>
-						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="其他" />其他
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater其他" value="其他" />其他
 						    <input type="text" id="yinhuanXfGiveWaterOther" name="yinhuanXfGiveWaterOther" class="input-me" 
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
 						     </li>
@@ -459,22 +652,22 @@ type='text/css'/>
 						<div class="div-b" style="width:55%">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem无隐患" value="无隐患" />无隐患
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="无水-设施损坏" />无水-设施损坏
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem无水-设施损坏" value="无水-设施损坏" />无水-设施损坏
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="无水-市政管网无水" />无水-市政管网无水
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem无水-市政管网无水" value="无水-市政管网无水" />无水-市政管网无水
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="水压不足-设施损坏" />水压不足-设施损坏
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem水压不足-设施损坏" value="水压不足-设施损坏" />水压不足-设施损坏
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="水压不足-市政管网水压无水" />水压不足-市政管网水压无水
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem水压不足-市政管网水压无水" value="水压不足-市政管网水压无水" />水压不足-市政管网水压无水
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="其他" />其他
+						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem其他" value="其他" />其他
 						    <input type="text" id="yinhuanInnerKillFireSystemOther" name="yinhuanInnerKillFireSystemOther" class="input-me" 
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
 						    </li>
@@ -494,19 +687,19 @@ type='text/css'/>
 						<div class="div-b" style="width:55%">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem无隐患" value="无隐患" />无隐患
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem未设置" value="未设置" />未设置
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="喷头损坏" />喷头损坏
+						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem喷头损坏" value="喷头损坏" />喷头损坏
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="无水" />无水
+						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem无水" value="无水" />无水
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="其他" />其他
+						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem其他" value="其他" />其他
 						    <input type="text" id="yinhuanAutoKillFireSystemOther" name="yinhuanAutoKillFireSystemOther" class="input-me" 
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
 						    </li>
@@ -527,17 +720,17 @@ type='text/css'/>
 						<div class="div-b" style="width:55%">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem无隐患" value="无隐患" />无隐患
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem未设置" value="未设置" />未设置
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="不能正常使用" />不能正常使用
+						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem不能正常使用" value="不能正常使用" />不能正常使用
 						    </li>
 							<li>
 						    
-						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="其他" />其他
+						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem其他" value="其他" />其他
 						    <input type="text" id="yinhuanFireAutoReportSystemOther" name="yinhuanFireAutoReportSystemOther" class="input-me" 
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
 						    </li>
@@ -558,16 +751,16 @@ type='text/css'/>
 						<div class="div-b" style="width:55%">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem无隐患" value="无隐患" />无隐患
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem未设置" value="未设置" />未设置
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="不能正常使用" />不能正常使用
+						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem不能正常使用" value="不能正常使用" />不能正常使用
 						    </li>
 							<li>					    
-						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="其他" />其他
+						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem其他" value="其他" />其他
 						    <input type="text" id="yinhuanFilterSmokeSystemOther" name="yinhuanFilterSmokeSystemOther" class="input-me" 
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
 							</li>
@@ -587,16 +780,16 @@ type='text/css'/>
 						<div class="div-b" style="width:55%">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi无隐患" value="无隐患" />无隐患
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="未设置" />未设置
+						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi未设置" value="未设置" />未设置
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="不能正常使用" />不能正常使用
+						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi不能正常使用" value="不能正常使用" />不能正常使用
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="其他" />其他
+						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi其他" value="其他" />其他
 						    <input type="text" id="yinhuanXfDianTiOther" name="yinhuanXfDianTiOther" class="input-me" 
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"  />
 						    </li>
@@ -616,19 +809,19 @@ type='text/css'/>
 						<div class="div-b" style="width:55%">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="无隐患" />无隐患
+						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin无隐患" value="无隐患" />无隐患
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="管道并未封堵或不符合要求" />管道并未封堵或不符合要求
+						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin管道并未封堵或不符合要求" value="管道并未封堵或不符合要求" />管道并未封堵或不符合要求
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="电气线路敷设不符合要求" />电气线路敷设不符合要求
+						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin电气线路敷设不符合要求" value="电气线路敷设不符合要求" />电气线路敷设不符合要求
 						    </li>
 							<li>
-						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="防火门设置不符合要求" />防火门设置不符合要求
+						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin防火门设置不符合要求" value="防火门设置不符合要求" />防火门设置不符合要求
 						    </li>
 							<li> 
-						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="其他" />其他
+						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin其他" value="其他" />其他
 						    <input type="text" id="yinhuanDianLanJinOther" name="yinhuanDianLanJinOther" class="input-me" 
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"  />
 							</li>
@@ -649,21 +842,7 @@ type='text/css'/>
 		   </div>
 		</div>
 	</div> 
- <div class="container">
-		 <div class="row set-row-pad" >
-<div class="col-lg-4 col-md-4 col-sm-4   col-lg-offset-1 col-md-offset-1 col-sm-offset-1 " data-scroll-reveal="enter from the bottom after 0.4s">
-
-	<hr />
-				
-</div>
-<div class="col-lg-4 col-md-4 col-sm-4   col-lg-offset-1 col-md-offset-1 col-sm-offset-1" data-scroll-reveal="enter from the bottom after 0.4s">
-
-	<hr />
-</div>
-
-
-</div>
-</div>
+ 
 			 
  <!-- CONTACT SECTION END-->
  
