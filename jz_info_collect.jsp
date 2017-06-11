@@ -82,6 +82,19 @@ type='text/css'/>
  			var b_addr_arr=[];
  			var b_id_arr=[];
 
+ 			var yinhuan_arr=new Array(
+ 				"yinhuanSafeLeave",
+ 				"yinhuanYjzmDevice",
+ 				"yinhuanLeaveItem",
+ 				"yinhuanXfGiveWater",
+ 				"yinhuanInnerKillFireSystem",
+ 				"yinhuanAutoKillFireSystem",
+ 				"yinhuanFireAutoReportSystem",
+ 				"yinhuanFilterSmokeSystem",
+ 				"yinhuanXfDianTi",
+ 				"yinhuanDianLanJin",
+ 				"xfss"
+ 				);
 
  			for(var item in buildingjsonarr){
  				//buildingjsonarr是个array[]，长度是建筑个数,成员是object
@@ -92,13 +105,23 @@ type='text/css'/>
  					$("#"+item).val(item_v);
  				}
 
- 				if("leaveRoad"==item
+ 				else if("leaveRoad"==item
  					||"safeLeaveRoad"==item
  					||"singleOldPersonCount"==item
  					||"jyplSystemCount"==item
  					||"monitorSmokingCount"==item){//简单的input字段
  					var obj=$("#"+item);
  					obj.val(item_v);
+ 				}
+ 				else if(.inArray(item,yinhuan_arr)> -1){
+ 					var temp_arr = buildingjsonarr[item]; //checkbox成员数组,item就是name
+ 					for(var i in temp_arr){//肯定是有值才会传递过来的
+ 						var check_value = i;//check_value是value
+ 						var check_id = item+check_value;//拼起来就是id
+ 						$("#"+check_id).iCheck("check");//设置选中就好了
+
+ 					}
+
  				}
  								
  			}
@@ -113,18 +136,7 @@ type='text/css'/>
  			 API2:选中事件$("#yinhuanSafeLeave无隐患").on('ifChecked',function(event){XXXX})
  			*/
  			
- 			var yinhuan_arr=new Array(
- 				"yinhuanSafeLeave",
- 				"yinhuanYjzmDevice",
- 				"yinhuanLeaveItem",
- 				"yinhuanXfGiveWater",
- 				"yinhuanInnerKillFireSystem",
- 				"yinhuanAutoKillFireSystem",
- 				"yinhuanFireAutoReportSystem",
- 				"yinhuanFilterSmokeSystem",
- 				"yinhuanXfDianTi",
- 				"yinhuanDianLanJin"
- 				);
+ 			
 			
  			$("#yinhuanSafeLeave无隐患").//选择无隐患后，其他项清空
  			on('ifChecked',function(event){
@@ -301,7 +313,7 @@ type='text/css'/>
  					$("#yinhuanDianLanJin无隐患").iCheck("uncheck");
 			});
 
-			
+
  			/* Test OK
  			for(var k in b_addr_arr)
  				console.log(b_addr_arr[k]);
