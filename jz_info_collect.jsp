@@ -22,8 +22,11 @@
 
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://cdn.bootcss.com/iCheck/1.0.2/icheck.min.js"></script>
 <link href="http://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet" type='
 text/css' />
+<link href="http://cdn.bootcss.com/iCheck/1.0.2/skins/flat/_all.css" rel="stylesheet" 
+type='text/css'/>
 <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
 
 <style> 
@@ -49,18 +52,25 @@ text/css' />
 		if(null !=request.getAttribute("buildInfo")){
 			tempBuildingJsonString = request.getAttribute("buildInfo").toString();
 	};	
+
+		String cellName = "";
+		if(null !=request.getAttribute("cellName")){
+			cellName = request.getAttribute("cellName").toString();
+	};	
+
+
 	%>
 	<script>
-		
- 		$().ready(function (){
- 			$("select").select2({
- 				tags:true,
- 				//minimumResultsForSearch:-1,
- 				closeOnSelect:false,
- 				'width':'280px'
- 			});
- 			$(".select2-search,.select2-focusser").remove();
 
+	
+ 		$().ready(function (){
+
+ 			$('input').iCheck({
+ 				checkboxClass:'icheckbox_flat-blue'
+ 			});
+ 			
+ 			var t = "<%=cellName%>";
+ 			$("#cellName").val(t);
  			var buildingjsonarr = <%=tempBuildingJsonString%>;
  			//console.log("AVC  "+buildingjsonarr.length);
  			//console.log("AVVC "+buildingjsonarr[0] );
@@ -76,10 +86,29 @@ text/css' />
  			for(var item in buildingjsonarr){
  				//buildingjsonarr是个array[]，长度是建筑个数,成员是object
  				var item_v = buildingjsonarr[item];
- 				//item_v是一个建筑的object，里面有buildingAddr和buildingId两个成员
  				console.log("item="+item+"  value="+item_v);
+ 				if("buildingId"==item
+ 					||"buildingAddr"==item){
+ 					$("#"+item).val(item_v);
+ 				}
+
+ 				if("leaveRoad"==item
+ 					||"safeLeaveRoad"==item
+ 					||"singleOldPersonCount"==item
+ 					||"jyplSystemCount"==item
+ 					||"monitorSmokingCount"==item){//简单的input字段
+ 					var obj=$("#"+i);
+ 					obj.val(item_v);
+ 				}
  								
  			}
+
+ 			$("#input:checkbox[name='yinhuanSafeLeave'][value='无隐患']").
+ 			on('ifChecked',function(event){
+ 					console.log('checked');
+ 			});
+
+
  			/* Test OK
  			for(var k in b_addr_arr)
  				console.log(b_addr_arr[k]);
@@ -162,7 +191,10 @@ text/css' />
 			 <div class="col-lg-12  col-md-12 col-sm-12">
 				<form 	role = "form" id="zj_info_collect_form" name="zjform" action="SetBuildAction" method="post">
 					<!--TODO 这里的变量需要修改-->
-					<input id="buildingName" name="buildingName" type="hidden" value=""/>
+					<input id="cellName" name="cellName" type="hidden" value=""/>
+					<input id="buildingAddr" name="buildingAddr" type="hidden" value=""/>
+					<input id="buildingId" name="buildingId" type="hidden" value=""/>
+
 					<!--TODO END-->
 
 					<div>
@@ -170,7 +202,7 @@ text/css' />
 							<h4><span style="color:red">*</span>疏散通道(个)&nbsp;&nbsp;:</h4>
 						</div>	
 						<div class="div-b">			
-						<input type="number" id="leaveRoad" name="leaveRoad" class="input-me " style="width:130px;margin-top:2%" required="required"  placeholder="请填入数字" />
+						<input type="number" min="0"  id="leaveRoad" name="leaveRoad" class="input-me " style="width:130px;margin-top:2%" required="required"  placeholder="请填入数字" />
 						</div>
 					</div>
 
@@ -182,7 +214,7 @@ text/css' />
 							<h4><span style="color:red">*</span>安全出口(个)&nbsp;&nbsp;:</h4>
 						</div>	
 						<div class="div-b">			
-						<input type="number" id="safeLeaveRoad" name="safeLeaveRoad" class="input-me " style="width:130px;margin-top:2%" required="required"  placeholder="请填入数字" />
+						<input type="number" min="0" id="safeLeaveRoad" name="safeLeaveRoad" class="input-me " style="width:130px;margin-top:2%" required="required"  placeholder="请填入数字" />
 						</div>
 					</div>
 
@@ -194,7 +226,7 @@ text/css' />
 							<h4><span style="color:red">*</span>独居老人人数&nbsp;&nbsp;:</h4>
 						</div>	
 						<div class="div-b">			
-						<input type="number" id="singleOldPersonCount" name="singleOldPersonCount" class="input-me " style="width:100px;margin-top:2%" required="required"  placeholder="请填入数字" />
+						<input type="number" min="0" id="singleOldPersonCount" name="singleOldPersonCount" class="input-me " style="width:100px;margin-top:2%" required="required"  placeholder="请填入数字" />
 						</div>
 					</div>
 
@@ -206,7 +238,7 @@ text/css' />
 							<h4><span style="color:red">*</span>简易喷淋系统(套)&nbsp;&nbsp;:</h4>
 						</div>	
 						<div class="div-b">			
-						<input type="number" id="jyplSystemCount" name="jyplSystemCount" class="input-me " style="width:90px;margin-top:2%" required="required"  placeholder="数字" />
+						<input type="number" min="0" id="jyplSystemCount" name="jyplSystemCount" class="input-me " style="width:90px;margin-top:2%" required="required"  placeholder="数字" />
 						</div>
 					</div>
 
@@ -218,7 +250,7 @@ text/css' />
 							<h4><span style="color:red">*</span>独立式感烟探测器(个)&nbsp;&nbsp;:</h4>
 						</div>	
 						<div class="div-b">			
-						<input type="number" id="monitorSmokingCount" name="monitorSmokingCount" class="input-me " style="width:90px;margin-top:2%" required="required"  placeholder="数字" />
+						<input type="number" min="0" id="monitorSmokingCount" name="monitorSmokingCount" class="input-me " style="width:90px;margin-top:2%" required="required"  placeholder="数字" />
 						</div>
 					</div>
 
@@ -228,29 +260,48 @@ text/css' />
 
 
 					<div >
-						<div class="div-c1">
+						<div class="div-a">
 							<h4><span style="color:red">*</span>建筑消防设施（多选）:</h4>
 						</div>
-						<div class="div-c2">
+						<div class="div-b">
+							<ul style="list-style:none;">
+						    <li>
 						    <input type="checkbox" name="xfss" id="xfss" value="室内消火栓系统" />室内消火栓系统
+							</li>
+							<li>
 						    <input type="checkbox" name="xfss" id="xfss" value="自动灭火系统" />
 						    自动灭火系统
+							</li>
+							<li>
 						    <input type="checkbox" name="xfss" id="xfss" value="火灾自动报警系统" />火灾自动报警系统
+							</li>
+							<li>
 						    <input type="checkbox" name="xfss" id="xfss" value="防烟和排烟设施" />防烟和排烟设施
+						    </li>
+							<li>
 						    <input type="checkbox" name="xfss" id="xfss" value="消防应急照明" />
 						    消防应急照明
+						    </li>
+							<li>
 						    <input type="checkbox" name="xfss" id="xfss" value="疏散指示标志" />
 						    疏散指示标志
+						    </li>
+							<li>
 						    <input type="checkbox" name="xfss" id="xfss" value="消防电梯" />消防电梯
+						    </li>
+							<li>
 						    <input type="checkbox" name="xfss" id="xfss" value="灭火器" />灭火器
+						    </li>
+							<li>
 						    <input type="checkbox" name="xfss" id="xfss" value="其他" />其他
 
+						    <input type="text" id="xfssOther" name="xfssOther" class="input-me" 
+						placeholder="其他详情" style="width:60px;border-bottom: 1px #98CBF7;"  />
+						    </li>
+							
+							</ul>
 						</div>
 
-						<div class="div-c3">
-						<input type="text" id="xfssOther" name="xfssOther" class="input-me" 
-						placeholder="其他详情" style="width:60px;margin-top:265%;border-bottom: 1px #98CBF7;" required="required" />
-						</div>
 					</div>
 
 					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
@@ -262,28 +313,40 @@ text/css' />
 					<hr />
 					<!--安全疏散-->
 					<div >
-						<div class="div-c1" style="width:30%">
+						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>安全疏散(通道、出口、楼梯)（多选）:
 						</div>
-						<div class="div-c2" style="width:50%">
-						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="无隐患" />无隐患
-						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="未设置" />
-						    未设置
+						<div class="div-b" style="width:55%">
+							<ul style="list-style:none;">
+						    <li>
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="无隐患" onclick="checkbox_check(this)" />无隐患
+							</li>
+							<li>
+						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="未设置" />未设置
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="消防通道阻塞" />消防通道阻塞
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="安全出口阻塞或锁闭" />安全出口阻塞或锁闭
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="未设置前室" />
 						    未设置前室
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="疏散宽度不足" />
 						    疏散宽度不足
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="通向疏散通道、楼梯的防火门未按要求设置" />通向疏散通道、楼梯的防火门未按要求设置
-						    
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave" value="其他" />其他
+						    <input type="text" id="yinhuanSafeLeaveOther" name="yinhuanSafeLeaveOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"/>
+						    </li>
 
-						</div>
-
-						<div class="div-c3">
-						<input type="text" id="yinhuanSafeLeaveOther" name="yinhuanSafeLeaveOther" class="input-me" 
-						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
 						</div>
 					</div>
 
@@ -294,20 +357,30 @@ text/css' />
 
 					<!--应急照明-->
 					<div >
-						<div class="div-c1" style="width:30%">
+						<div class="div-a">
 							<span style="color:red">*</span>应急照明（多选）:
 						</div>
-						<div class="div-c2" style="width:50%">
+						<div class="div-b">
+						<ul style="list-style:none;">
+						    <li>
 						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="无隐患" />无隐患
+							</li>
+							<li>
 						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="未设置" />未设置
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="配置不符合要求" />配置不符合要求
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="损坏" />损坏
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice" value="其他" />其他
-						</div>
-
-						<div class="div-c3">
-						<input type="text" id="yinhuanYjzmDeviceOther" name="yinhuanYjzmDeviceOther" class="input-me" 
-						placeholder="其他详情" style="width:70px;margin-top:90%;border-bottom: 1px #98CBF7;" required="required" />
+						    <input type="text" id="yinhuanYjzmDeviceOther" name="yinhuanYjzmDeviceOther" class="input-me" 
+						placeholder="其他详情" style="width:70px;border-bottom: 1px #98CBF7;" />
+						    </li>
+						</ul>
+							
 						</div>
 					</div>
 
@@ -316,20 +389,30 @@ text/css' />
 
 					<!--疏散指示标志-->
 					<div >
-						<div class="div-c1" style="width:30%">
+						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>疏散指示标志（多选）:
 						</div>
-						<div class="div-c2" style="width:50%">
+						<div class="div-b">
+							<ul style="list-style:none;">
+						    <li>
 						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="无隐患" />无隐患
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="未设置" />未设置
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="配置不符合要求" />配置不符合要求
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="损坏" />损坏
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem" value="其他" />其他
-						</div>
-
-						<div class="div-c3">
-						<input type="text" id="yinhuanLeaveItemOther" name="yinhuanLeaveItemOther" class="input-me" 
-						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						    <input type="text" id="yinhuanLeaveItemOther" name="yinhuanLeaveItemOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"  />
+						    </li>
+						</ul>
+							
 						</div>
 					</div>
 
@@ -338,20 +421,30 @@ text/css' />
 
 					<!--消防给水-->
 					<div >
-						<div class="div-c1" style="width:30%">
+						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>消防给水（多选）:
 						</div>
-						<div class="div-c2" style="width:50%">
+						<div class="div-b" style="width:55%">
+							<ul style="list-style:none;">
+						    <li>
 						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="无隐患" />无隐患
-						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="未设置" />未设置
-						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="消防水池或消防水箱无水" />消防水池或消防水箱无水
-						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="消防水池或消防水箱不能正常使用" />消防水池或消防水箱不能正常使用
-						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="其他" />其他
-						</div>
+						     </li>
+							<li>
 
-						<div class="div-c3">
-						<input type="text" id="yinhuanXfGiveWaterOther" name="yinhuanXfGiveWaterOther" class="input-me" 
-						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="未设置" />未设置
+						     </li>
+							<li>
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="消防水池或消防水箱无水" />消防水池或消防水箱无水
+						     </li>
+							<li>
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="消防水池或消防水箱不能正常使用" />消防水池或消防水箱不能正常使用
+						     </li>
+							<li>
+						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater" value="其他" />其他
+						    <input type="text" id="yinhuanXfGiveWaterOther" name="yinhuanXfGiveWaterOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
+						     </li>
+							</ul>
 						</div>
 					</div>
 
@@ -360,21 +453,32 @@ text/css' />
 
 					<!--室内消火栓系统-->
 					<div >
-						<div class="div-c1" style="width:30%">
+						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>室内消火栓系统（多选）:
 						</div>
-						<div class="div-c2" style="width:50%">
+						<div class="div-b" style="width:55%">
+							<ul style="list-style:none;">
+						    <li>
 						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="无隐患" />无隐患
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="无水-设施损坏" />无水-设施损坏
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="无水-市政管网无水" />无水-市政管网无水
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="水压不足-设施损坏" />水压不足-设施损坏
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="水压不足-市政管网水压无水" />水压不足-市政管网水压无水
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem" value="其他" />其他
-						</div>
-
-						<div class="div-c3">
-						<input type="text" id="yinhuanInnerKillFireSystemOther" name="yinhuanInnerKillFireSystemOther" class="input-me" 
-						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						    <input type="text" id="yinhuanInnerKillFireSystemOther" name="yinhuanInnerKillFireSystemOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
+						    </li>
+							</ul>
 						</div>
 					</div>
 
@@ -384,21 +488,32 @@ text/css' />
 
 					<!--自动灭火系统-->
 					<div >
-						<div class="div-c1" style="width:30%">
+						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>自动灭火系统（多选）:
 						</div>
-						<div class="div-c2" style="width:50%">
+						<div class="div-b" style="width:55%">
+							<ul style="list-style:none;">
+						    <li>
 						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="无隐患" />无隐患
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="未设置" />未设置
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="喷头损坏" />喷头损坏
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="无水" />无水
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem" value="其他" />其他
+						    <input type="text" id="yinhuanAutoKillFireSystemOther" name="yinhuanAutoKillFireSystemOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
+						    </li>
+							</ul>
+							
 						</div>
 
-						<div class="div-c3">
-						<input type="text" id="yinhuanAutoKillFireSystemOther" name="yinhuanAutoKillFireSystemOther" class="input-me" 
-						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
-						</div>
 					</div>
 
 					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
@@ -406,20 +521,27 @@ text/css' />
 
 					<!--火灾自动报警系统-->
 					<div >
-						<div class="div-c1" style="width:30%">
+						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>火灾自动报警系统（多选）:
 						</div>
-						<div class="div-c2" style="width:50%">
+						<div class="div-b" style="width:55%">
+							<ul style="list-style:none;">
+						    <li>
 						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="无隐患" />无隐患
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="未设置" />未设置
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="不能正常使用" />不能正常使用
+						    </li>
+							<li>
 						    
 						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem" value="其他" />其他
-						</div>
-
-						<div class="div-c3">
-						<input type="text" id="yinhuanFireAutoReportSystemOther" name="yinhuanFireAutoReportSystemOther" class="input-me" 
-						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						    <input type="text" id="yinhuanFireAutoReportSystemOther" name="yinhuanFireAutoReportSystemOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
+						    </li>
+							</ul>
 						</div>
 					</div>
 
@@ -430,20 +552,26 @@ text/css' />
 
 					<!--排烟和防烟设施-->
 					<div >
-						<div class="div-c1" style="width:30%">
+						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>排烟和防烟设施（多选）:
 						</div>
-						<div class="div-c2" style="width:50%">
+						<div class="div-b" style="width:55%">
+							<ul style="list-style:none;">
+						    <li>
 						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="无隐患" />无隐患
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="未设置" />未设置
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="不能正常使用" />不能正常使用
-						    
+						    </li>
+							<li>					    
 						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem" value="其他" />其他
-						</div>
-
-						<div class="div-c3">
-						<input type="text" id="yinhuanFilterSmokeSystemOther" name="yinhuanFilterSmokeSystemOther" class="input-me" 
-						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						    <input type="text" id="yinhuanFilterSmokeSystemOther" name="yinhuanFilterSmokeSystemOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
+							</li>
+						</ul>
 						</div>
 					</div>
 
@@ -453,20 +581,26 @@ text/css' />
 
 					<!--消防电梯-->
 					<div >
-						<div class="div-c1" style="width:30%">
+						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>消防电梯（多选）:
 						</div>
-						<div class="div-c2" style="width:50%">
+						<div class="div-b" style="width:55%">
+							<ul style="list-style:none;">
+						    <li>
 						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="无隐患" />无隐患
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="未设置" />未设置
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="不能正常使用" />不能正常使用
-						    
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi" value="其他" />其他
-						</div>
-
-						<div class="div-c3">
-						<input type="text" id="yinhuanXfDianTiOther" name="yinhuanXfDianTiOther" class="input-me" 
-						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						    <input type="text" id="yinhuanXfDianTiOther" name="yinhuanXfDianTiOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"  />
+						    </li>
+							</ul>
 						</div>
 					</div>
 
@@ -476,21 +610,29 @@ text/css' />
 
 					<!--电梯井-->
 					<div >
-						<div class="div-c1" style="width:30%">
+						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>电缆井（多选）:
 						</div>
-						<div class="div-c2" style="width:50%">
+						<div class="div-b" style="width:55%">
+							<ul style="list-style:none;">
+						    <li>
 						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="无隐患" />无隐患
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="管道并未封堵或不符合要求" />管道并未封堵或不符合要求
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="电气线路敷设不符合要求" />电气线路敷设不符合要求
+						    </li>
+							<li>
 						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="防火门设置不符合要求" />防火门设置不符合要求
-						    
+						    </li>
+							<li> 
 						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin" value="其他" />其他
-						</div>
-
-						<div class="div-c3">
-						<input type="text" id="yinhuanDianLanJinOther" name="yinhuanDianLanJinOther" class="input-me" 
-						placeholder="其他详情" style="width:80px;margin-top:230%;border-bottom: 1px #98CBF7;" required="required" />
+						    <input type="text" id="yinhuanDianLanJinOther" name="yinhuanDianLanJinOther" class="input-me" 
+						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"  />
+							</li>
+						</ul>
 						</div>
 					</div>
 

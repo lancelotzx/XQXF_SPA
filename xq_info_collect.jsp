@@ -49,6 +49,7 @@ text/css' />
 	<script>
 
  		$().ready(function (){
+ 			
  			var celljsonarr = eval(<%=tempCellJsonString%>);
  			for(var i in celljsonarr){ 
  				console.log("item="+i+"  value="+celljsonarr[i]);
@@ -274,7 +275,7 @@ text/css' />
 							<h4><span style="color:red">*</span>小区建筑数量(9层及以下)    :</h4>
 						</div>	
 						<div class="div-b">			
-						<input type="number" id="buildingCountLess9" name="buildingCountLess9" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
+						<input type="number" min="0" id="buildingCountLess9" name="buildingCountLess9" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
 						</div>
 					</div>
 
@@ -286,7 +287,7 @@ text/css' />
 							<h4><span style="color:red">*</span>小区建筑数量(10到33层)    :</h4>
 						</div>	
 						<div class="div-b">			
-						<input type="number" id="buildingCount10_33" name="buildingCount10_33" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
+						<input type="number" min="0" id="buildingCount10_33" name="buildingCount10_33" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
 						</div>
 					</div>
 
@@ -298,7 +299,7 @@ text/css' />
 							<h4><span style="color:red">*</span>小区建筑数量(33层以上)    :</h4>
 						</div>	
 						<div class="div-b">			
-						<input type="number" id="buildingCountMore34" name="buildingCountMore34" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
+						<input type="number" min="0" id="buildingCountMore34" name="buildingCountMore34" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
 						</div>
 					</div>
 
