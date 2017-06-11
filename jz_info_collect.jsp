@@ -65,7 +65,9 @@ type='text/css'/>
 	<script>
 
 		$.validator.setDefaults({  
-    		//submitHandler: function() { alert("submitted!");return false; }  
+    		submitHandler: function() { 
+    			//alert("submitted!");
+    			return true; }  
 		}); 
 
 	
@@ -73,31 +75,41 @@ type='text/css'/>
 
  			$("#zj_info_collect_form").validate({
  				rules:{
+ 					leaveRoad:"required",
+ 					safeLeaveRoad:"required",
+ 					singleOldPersonCount:"required",
+ 					jyplsystemCount:"required",
+ 					monitorSmokingCount:"required",
  					yinhuanSafeLeave:"required",
  					xfss: "required" ,
- 				yinhuanYjzmDevice:"required" ,
- 				yinhuanLeaveItem:"required" ,
- 				yinhuanXfGiveWater:"required" ,
- 				yinhuanInnerKillFireSystem:"required" ,
- 				yinhuanAutoKillFireSystem:"required" ,
- 				yinhuanFireAutoReportSystem:"required" ,
- 				yinhuanFilterSmokeSystem:"required" ,
- 				yinhuanXfDianTi:"required" ,
- 				yinhuanDianLanJin:"required" 
+	 				yinhuanYjzmDevice:"required" ,
+	 				yinhuanLeaveItem:"required" ,
+	 				yinhuanXfGiveWater:"required" ,
+	 				yinhuanInnerKillFireSystem:"required" ,
+	 				yinhuanAutoKillFireSystem:"required" ,
+	 				yinhuanFireAutoReportSystem:"required" ,
+	 				yinhuanFilterSmokeSystem:"required" ,
+	 				yinhuanXfDianTi:"required" ,
+	 				yinhuanDianLanJin:"required" ,
 
  				},
  				messages:{
- 					yinhuanSafeLeave:"请至少选择一项",
- 					xfss: "请至少选择一项" ,
-	 				yinhuanYjzmDevice:"请至少选择一项" ,
-	 				yinhuanLeaveItem:"请至少选择一项" ,
-	 				yinhuanXfGiveWater:"请至少选择一项" ,
-	 				yinhuanInnerKillFireSystem:"请至少选择一项" ,
-	 				yinhuanAutoKillFireSystem:"请至少选择一项" ,
-	 				yinhuanFireAutoReportSystem:"请至少选择一项" ,
-	 				yinhuanFilterSmokeSystem:"请至少选择一项" ,
-	 				yinhuanXfDianTi:"请至少选择一项" ,
-	 				yinhuanDianLanJin:"请至少选择一项" 
+ 					leaveRoad:"请填写疏散通道个数",
+ 					safeLeaveRoad:"请填写安全出口个数",
+ 					singleOldPersonCount:"请填写独居老人个数",
+ 					jyplsystemCount:"请填写喷淋系统个数",
+ 					monitorSmokingCount:"请填写感烟探测器个数",
+ 					yinhuanSafeLeave:"安全疏散 请至少选择一项",
+ 					xfss: "消防设施：请至少选择一项" ,
+	 				yinhuanYjzmDevice:"应急照明 请至少选择一项" ,
+	 				yinhuanLeaveItem:"疏散指示标识 请至少选择一项" ,
+	 				yinhuanXfGiveWater:"消防给水 请至少选择一项" ,
+	 				yinhuanInnerKillFireSystem:"室内消火栓系统 请至少选择一项" ,
+	 				yinhuanAutoKillFireSystem:"自动灭火系统 请至少选择一项" ,
+	 				yinhuanFireAutoReportSystem:"火灾自动报警系统 请至少选择一项" ,
+	 				yinhuanFilterSmokeSystem:"排烟系统 请至少选择一项" ,
+	 				yinhuanXfDianTi:"消防电梯 请至少选择一项" ,
+	 				yinhuanDianLanJin:"电缆井 请至少选择一项" 
  				},
  				showErrors: function(errorMap, errorList) {  
 		            var msg = "";  
@@ -529,7 +541,7 @@ type='text/css'/>
 						<div class="div-b">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="xfss" id="xfss室内消火栓系统" value="室内消火栓系统" />室内消火栓系统
+						    <input type="checkbox" name="xfss" id="xfss室内消火栓系统" value="室内消火栓系统"  />室内消火栓系统
 							</li>
 							<li>
 						    <input type="checkbox" name="xfss" id="xfss自动灭火系统" value="自动灭火系统" />
