@@ -108,15 +108,26 @@ type='text/css'/>
  				else if("leaveRoad"==item
  					||"safeLeaveRoad"==item
  					||"singleOldPersonCount"==item
- 					||"jyplSystemCount"==item
- 					||"monitorSmokingCount"==item){//简单的input字段
+ 					||"jyplsystemCount"==item
+ 					||"monitorSmokingCount"==item
+ 					||"xfssOther"==item
+ 					||"yinhuanSafeLeaveOther"==item
+ 					||"yinhuanYjzmDeviceOther"==item
+ 					||"yinhuanLeaveItemOther"==item
+ 					||"yinhuanXfGiveWaterOther"==item
+ 					||"yinhuanInnerKillFireSystemOther"==item
+ 					||"yinhuanAutoKillFireSystemOther"==item
+ 					||"yinhuanFilterSmokeSystemOther"==item
+ 					||"yinhuanFilterSmokeSystemOther"==item
+ 					||"yinhuanXfDianTiOther"==item
+ 					||"yinhuanDianLanJinOther"==item){//简单的input字段
  					var obj=$("#"+item);
  					obj.val(item_v);
  				}
- 				else if(.inArray(item,yinhuan_arr)> -1){
+ 				else if($.inArray(item,yinhuan_arr)!= -1){
  					var temp_arr = buildingjsonarr[item]; //checkbox成员数组,item就是name
  					for(var i in temp_arr){//肯定是有值才会传递过来的
- 						var check_value = i;//check_value是value
+ 						var check_value = temp_arr[i];//check_value是value
  						var check_id = item+check_value;//拼起来就是id
  						$("#"+check_id).iCheck("check");//设置选中就好了
 
@@ -443,7 +454,7 @@ type='text/css'/>
 							<h4><span style="color:red">*</span>简易喷淋系统(套)&nbsp;&nbsp;:</h4>
 						</div>	
 						<div class="div-b">			
-						<input type="number" min="0" id="jyplSystemCount" name="jyplSystemCount" class="input-me " style="width:90px;margin-top:2%" required="required"  placeholder="数字" />
+						<input type="number" min="0" id="jyplsystemCount" name="jyplsystemCount" class="input-me " style="width:90px;margin-top:2%" required="required"  placeholder="数字" />
 						</div>
 					</div>
 
@@ -471,34 +482,34 @@ type='text/css'/>
 						<div class="div-b">
 							<ul style="list-style:none;">
 						    <li>
-						    <input type="checkbox" name="xfss" id="xfss" value="室内消火栓系统" />室内消火栓系统
+						    <input type="checkbox" name="xfss" id="xfss室内消火栓系统" value="室内消火栓系统" />室内消火栓系统
 							</li>
 							<li>
-						    <input type="checkbox" name="xfss" id="xfss" value="自动灭火系统" />
+						    <input type="checkbox" name="xfss" id="xfss自动灭火系统" value="自动灭火系统" />
 						    自动灭火系统
 							</li>
 							<li>
-						    <input type="checkbox" name="xfss" id="xfss" value="火灾自动报警系统" />火灾自动报警系统
+						    <input type="checkbox" name="xfss" id="xfss火灾自动报警系统" value="火灾自动报警系统" />火灾自动报警系统
 							</li>
 							<li>
-						    <input type="checkbox" name="xfss" id="xfss" value="防烟和排烟设施" />防烟和排烟设施
+						    <input type="checkbox" name="xfss" id="xfss防烟和排烟设施" value="防烟和排烟设施" />防烟和排烟设施
 						    </li>
 							<li>
-						    <input type="checkbox" name="xfss" id="xfss" value="消防应急照明" />
+						    <input type="checkbox" name="xfss" id="xfss消防应急照明" value="消防应急照明" />
 						    消防应急照明
 						    </li>
 							<li>
-						    <input type="checkbox" name="xfss" id="xfss" value="疏散指示标志" />
+						    <input type="checkbox" name="xfss" id="xfss疏散指示标志" value="疏散指示标志" />
 						    疏散指示标志
 						    </li>
 							<li>
-						    <input type="checkbox" name="xfss" id="xfss" value="消防电梯" />消防电梯
+						    <input type="checkbox" name="xfss" id="xfss消防电梯" value="消防电梯" />消防电梯
 						    </li>
 							<li>
-						    <input type="checkbox" name="xfss" id="xfss" value="灭火器" />灭火器
+						    <input type="checkbox" name="xfss" id="xfss灭火器" value="灭火器" />灭火器
 						    </li>
 							<li>
-						    <input type="checkbox" name="xfss" id="xfss" value="其他" />其他
+						    <input type="checkbox" name="xfss" id="xfss其他" value="其他" />其他
 
 						    <input type="text" id="xfssOther" name="xfssOther" class="input-me" 
 						placeholder="其他详情" style="width:60px;border-bottom: 1px #98CBF7;"  />
@@ -562,10 +573,10 @@ type='text/css'/>
 
 					<!--应急照明-->
 					<div >
-						<div class="div-a">
+						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>应急照明（多选）:
 						</div>
-						<div class="div-b">
+						<div class="div-b" style="width:55%">
 						<ul style="list-style:none;">
 						    <li>
 						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice无隐患" value="无隐患" />无隐患
