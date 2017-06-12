@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="description" content="武汉市消防局—小区消防信息采集系统" />
 <meta name="author" content="Lancelot" />
-<title>小区信息检查</title>
+<title>武汉消防</title>
 <!-- BOOTSTRAP CORE STYLE CSS -->
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
 <!-- FONT AWESOME CSS -->
@@ -27,8 +27,8 @@ text/css' />
 <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
 
 <style> 
-.div-a{ float:left;display:table-cell;vertical-align: middle;} 
-.div-b{ float:left;display:table-cell;vertical-align: middle;} 
+.div-a{ float:left;display:table-cell;vertical-align: middle; width: 52%} 
+.div-b{ float:left;display:table-cell;vertical-align: middle; width: 48%} 
 
 .div-c1{ float:left;width:50%;display:table-cell;vertical-align: middle;} 
 .div-c2{ float:left;width:30%;display:table-cell;vertical-align: middle;} 
@@ -36,6 +36,20 @@ text/css' />
 .input-me{
 	border-top-width: 0px;border-left-width: 0px;border-right-width: 0px;
 	font-size: 12pt;background:#f5f5f5;border-bottom: 0px solid #98CBF7;
+}
+
+
+.title {
+    text-align: center;
+}
+
+.f700 {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #2f9dce;
+}
+body{
+    font-size: 18px;
 }
 
 </style> 
@@ -119,19 +133,16 @@ text/css' />
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
 	<div class="container">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<div  sytle="color:#fff"><h3>居民信息检查</h3></div>
+			<div  sytle="color:#fff"><h3 class="title">居民小区消防检查</h3></div>
 		</div>
+		<!--
 		<div class="navbar-collapse collapse move-me">
 			<ul class="nav navbar-nav navbar-right">
 				<li ><a href="GoToIndexAction"><h3>回到首页</h3></a></li>
 
 			</ul>
 		</div>
+		-->
 	   
 	</div>
 </div>
@@ -174,7 +185,7 @@ text/css' />
 						<div class="div-a" style = "">
 							<h4>小区地址:</h4>
 						</div>
-						<div class="div-b" id="cellAddr">
+						<div class="div-b" style="" id="cellAddr">
 						</div>
 					</div>
 					<!--end mod 小区地址-->
@@ -190,35 +201,15 @@ text/css' />
 
 					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
 
-					<!--add 小区管理主体-->
-					<div >
-						<div class="div-c1" style="width:45%">
-							<h4><span style="color:red">*</span>小区管理主体:</h4>
-						</div>
-						<div class="div-c2" style="width:30%">
-						    <select id="cellGlzt" name="cellGlzt" class="form-control" required="required">
-						    		<option value="" selected="true" disabled="true">请选择
-									</option>
-									<option value="物业服务企业">物业服务企业</option>
-									<option value="居民委员会">居民委员会</option>
-									<option value="其他">其他</option>
-						    </select>		  				     	
-						</div>
-						<div class="div-c3">
-						<input type="text" id="cellGlztOther" name="cellGlztOther" class="input-me" placeholder="请填入管理主体名称" style="width:80px;" required="required" />
-						</div>
-					</div>
-
-					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
-					<!--end add 小区管理主体 done-->
+					
 
 					
 					<div>
 						<div class="div-a">
-							<h4><span style="color:red">*</span>社区消防安全责任人  :</h4>
+							<h4><span style="color:red">*</span>社区消防安全责任人:</h4>
 						</div>
 						<div class="div-b" >
-							<input type="text" id="communityZrrPerson" name="communityZrrPerson" class="input-me" required="required"  placeholder="请填写姓名" />
+							<input type="text" id="communityZrrPerson" name="communityZrrPerson" class="input-me" style="width:120px;margin-top:2%" required="required"  placeholder="请填写姓名" />
 						</div>
 					</div>
 
@@ -227,22 +218,47 @@ text/css' />
 
 					<div >
 						<div class="div-a">
-							<h4><span style="color:red">*</span>社区民警&nbsp;&nbsp;:</h4>
+							<h4><span style="color:red">*</span>社区民警:</h4>
 						</div>
 						<div class="div-b">
-							<input type="text" id="communityGlrPerson" name="communityGlrPerson" class="input-me " required="required"  placeholder="请填写姓名" />
+							<input type="text" id="communityGlrPerson" name="communityGlrPerson" class="input-me " style="width:120px;margin-top:2%" required="required"  placeholder="请填写姓名" />
 						</div>
 					</div>
 
 					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
 					<!--end社区消防安全管理人->社区民警 done-->
 
+					<!--add 小区管理主体-->
+					<div >
+						<div class="div-a" style="">
+							<h4><span style="color:red">*</span>小区管理主体:</h4>
+						</div>
+						<div class="div-b" style="">
+							<div>
+						    <select id="cellGlzt" name="cellGlzt" class="form-control" required="required">
+						    		<option value="" selected="true" disabled="true">请选择
+									</option>
+									<option value="物业服务企业">物业服务企业</option>
+									<option value="居民委员会">居民委员会</option>
+									<option value="其他">其他</option>
+						    </select>
+						    </div>
+						    <div class="\">
+							<input type="text" id="cellGlztOther" name="cellGlztOther" class="input-me" placeholder="请填入管理主体名称" style="width:130px;" required="required" />
+							</div>		  				     	
+						</div>
+						
+					</div>
+
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 小区管理主体 done-->
+
 					<div >
 						<div class="div-a">
-							<h4><span style="color:red">*</span>小区消防安全责任人&nbsp;:</h4>
+							<h4><span style="color:red">*</span>小区消防安全责任人:</h4>
 						</div>
 						<div class="div-b">
-							<input type="text" id="cellZrrPerson" name="cellZrrPerson" class="input-me " required="required"  placeholder="请填写姓名" />
+							<input type="text" id="cellZrrPerson" name="cellZrrPerson" class="input-me " style="width:120px;margin-top:2%" required="required"  placeholder="请填写姓名" />
 						</div>
 					</div>
 
@@ -251,10 +267,10 @@ text/css' />
 
 					<div >
 						<div class="div-a">
-							<h4><span style="color:red">*</span>小区消防安全管理人&nbsp;:</h4>
+							<h4><span style="color:red">*</span>小区消防安全管理人:</h4>
 						</div>
 						<div class="div-b">
-							<input type="text" id="cellGlrPerson" name="cellGlrPerson" class="input-me " required="required"  placeholder="请填写姓名" />
+							<input type="text" id="cellGlrPerson" name="cellGlrPerson" class="input-me " style="width:120px;margin-top:2%" required="required"  placeholder="请填写姓名" />
 						</div>
 					</div>
 
@@ -271,7 +287,7 @@ text/css' />
 					-->
 					<div>
 						<div class="div-a">
-							<h4><span style="color:red">*</span>小区建筑数量(9层及以下)    :</h4>
+							<h4><span style="color:red">*</span>小区建筑数量(9层及以下):</h4>
 						</div>	
 						<div class="div-b">			
 						<input type="number" min="0" id="buildingCountLess9" name="buildingCountLess9" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
@@ -283,7 +299,7 @@ text/css' />
 
 					<div>
 						<div class="div-a">
-							<h4><span style="color:red">*</span>小区建筑数量(10到33层)    :</h4>
+							<h4><span style="color:red">*</span>小区建筑数量(10到33层):</h4>
 						</div>	
 						<div class="div-b">			
 						<input type="number" min="0" id="buildingCount10_33" name="buildingCount10_33" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
@@ -295,7 +311,7 @@ text/css' />
 
 					<div>
 						<div class="div-a">
-							<h4><span style="color:red">*</span>小区建筑数量(33层以上)    :</h4>
+							<h4><span style="color:red">*</span>小区建筑数量(33层以上):</h4>
 						</div>	
 						<div class="div-b">			
 						<input type="number" min="0" id="buildingCountMore34" name="buildingCountMore34" class="input-me " style="width:60px;" required="required"  placeholder="请填入数字" />
@@ -309,7 +325,7 @@ text/css' />
 					
 					<div >
 						<div class="div-a">
-							<h4><span style="color:red">*</span>是否有消防控制室:&nbsp;&nbsp;</h4>
+							<h4><span style="color:red">*</span>是否有消防控制室:</h4>
 						</div>
 						<div class="div-b" style="width:30%">
 							<h4><input type="radio" name="xiaofangControlRoom" id="xiaofangControlRoom" value="有" required="required"／>有</h4>
@@ -323,7 +339,7 @@ text/css' />
 
 					<div >
 						<div class="div-a">
-							<h4><span style="color:red">*</span>是否有微型消防站:&nbsp;&nbsp;</h4>
+							<h4><span style="color:red">*</span>是否有微型消防站:</h4>
 						</div>
 						<div class="div-b" style="width:30%">
 							<h4><input type="radio" name="smallXiaofangStation" id="smallXiaofangStation" value="有" required="required"／>有</h4>
@@ -337,7 +353,7 @@ text/css' />
 
 					<div >
 						<div class="div-a">
-							<h4><span style="color:red">*</span>是否有消防车道:&nbsp;&nbsp;</h4>
+							<h4><span style="color:red">*</span>是否有消防车道:</h4>
 						</div>
 						<div class="div-b" style="width:30%">
 							<h4><input type="radio" name="xiaofangCarRoad" id="xiaofangCarRoad" value="有" required="required"／>有</h4>
@@ -351,7 +367,7 @@ text/css' />
 
 					
 					<div >
-						<div class="div-a"><h4>疏散通道(个)&nbsp;&nbsp;:</h4></div>
+						<div class="div-a"><h4>疏散通道(个):</h4></div>
 						<div class="div-b" id="leaveRoad" name="leaveRoad">						
 						</div>
 					</div>
@@ -362,7 +378,7 @@ text/css' />
 					<!--end add 疏散通道-->
 
 					<div >
-						<div class="div-a"><h4>安全出口(个)&nbsp;&nbsp;:</h4></div>
+						<div class="div-a"><h4>安全出口(个):</h4></div>
 						<div class="div-b" id="safeLeaveRoad" name="safeLeaveRoad">						
 						</div>
 					</div>
@@ -373,7 +389,7 @@ text/css' />
 					<!--end add 安全出口-->
 
 					<div >
-						<div class="div-a"><h4>独居老人个数&nbsp;&nbsp;:</h4></div>
+						<div class="div-a"><h4>独居老人(个):</h4></div>
 						<div class="div-b" id="singleOldPersonCount" name="singleOldPersonCount">						
 						</div>
 					</div>
@@ -384,7 +400,7 @@ text/css' />
 					<!--end add 独居老人个数-->
 
 					<div >
-						<div class="div-a"><h4>简易喷淋系统(套)&nbsp;&nbsp;:</h4></div>
+						<div class="div-a"><h4>简易喷淋系统(套):</h4></div>
 						<div class="div-b" id="jyplSystemCount" name="jyplSystemCount">						
 						</div>
 					</div>
@@ -395,7 +411,7 @@ text/css' />
 					<!--end add 简易喷淋系统-->
 
 					<div >
-						<div class="div-a"><h4>独立式感烟探测器(个)&nbsp;&nbsp;:</h4></div>
+						<div class="div-a"><h4>独立式感烟探测器(个):</h4></div>
 						<div class="div-b" id="monitorSmokingDeviceCount" name="monitorSmokingDeviceCount">						
 						</div>
 					</div>
@@ -407,7 +423,7 @@ text/css' />
 
 					<div >
 						<div class="div-a">
-							<h4><span style="color:red">*</span>商业出租情况:&nbsp;&nbsp;</h4>
+							<h4><span style="color:red">*</span>商业出租情况:</h4>
 						</div>
 						<div class="div-b" style="width:30%">
 							<h4><input type="radio" name="business" id="business" value="有" required="required"／>有</h4>
@@ -421,7 +437,7 @@ text/css' />
 
 					<div >
 						<div class="div-a">
-							<h4><span style="color:red">*</span>危险物品储存:&nbsp;&nbsp;</h4>
+							<h4><span style="color:red">*</span>危险物品储存:</h4>
 						</div>
 						<div class="div-b" style="width:30%">
 							<h4><input type="radio" name="dangerThing" id="dangerThing" value="有" required="required"／>有</h4>
@@ -435,7 +451,7 @@ text/css' />
 
 					<div >
 						<div class="div-a">
-							<h4><span style="color:red">*</span>电动车集中存放:&nbsp;&nbsp;</h4>
+							<h4><span style="color:red">*</span>电动车存放:</h4>
 						</div>
 						<div class="div-b" style="">
 							<h4><input type="radio" name="autoMobile" id="autoMobile" value="集中存放，并有充电装置" required="required"／>集中存放，并有充电装置</h4>

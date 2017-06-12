@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="description" content="武汉市消防局—小区消防信息采集系统" />
 <meta name="author" content="Lancelot" />
-<title>居民信息检查</title>
+<title>武汉消防</title>
 <!-- BOOTSTRAP CORE STYLE CSS -->
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
 <!-- FONT AWESOME CSS -->
@@ -28,6 +28,21 @@ text/css' />
 <!-- Baidu MAP JS API -->
 <script src="http://api.map.baidu.com/getscript?v=2.0&ak=jnu9Z2xhGz7C22mOt1VfIzmY4amPh2No&services=&t=20170517145936"></script>
 
+<style>
+.title {
+    text-align: center;
+}
+
+.f700 {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #2f9dce;
+}
+body{
+    font-size: 18px;
+}
+</style>
+
 
 </head>
 <body >
@@ -44,19 +59,8 @@ text/css' />
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
 	<div class="container">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<div  sytle="color:#fff"><h3>居民信息检查</h3></div>
-		</div>
-		<div class="navbar-collapse collapse move-me">
-        <form role="form" id="naviform" name="naviform">
-			<ul class="nav navbar-nav navbar-right">
-				<li ><a href=""><h3>填写检查</h3></a></li>
-			</ul>
-        </form>
+			
+			<div  sytle="color:#fff"><h3 class="title">居民小区消防检查</h3></div>
 		</div>
 	   
 	</div>
@@ -85,17 +89,19 @@ text/css' />
 								 <div class="col-lg-12  col-md-12 col-sm-12" data-scroll-reveal="enter from the bottom after 0.4s">
 								 	
 									<div class="about-div">
-										<p >
-									   请下拉选择检查的小区。
+										<p>
+									      请下拉选择检查的居民小区。
 								   		</p>
 										<div class="form-group">
-											<select id="xqmc" name="xqmc" class="form-control">
+											<select id="xqmc" name="xqmc" class="form-control" style="font-size:18px" required="required">
+											<option value="" selected="true" disabled="true">请选择
+											</option>
 											<c:forEach items="${cellList}" var="cellname">
 											<option value=${cellname} ><h4> ${cellname} </h4></option>
 											</c:forEach>
 											</select>
-											</div>
-									 	</div>
+										</div>
+									</div>
 								 	<hr />
 									<hr />
 								   <p >
@@ -105,7 +111,7 @@ text/css' />
 								<input type="hidden" id="latd" name="latd" value="" />
 								<input type="hidden" id="lng"  name="lng"  value="" />
 								
-							   	<button type="button" id="GPSshow" class="btn btn-info  btn-lg" >
+							   	<button type="button" id="GPSshow" class="btn btn-info btn-block btn-lg" >
 							   	开始填写</button>
 								
 					            <script>
