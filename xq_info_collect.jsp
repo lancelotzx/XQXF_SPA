@@ -81,14 +81,25 @@ body{
  				 ){
  					$("#"+i).html("<h4>"+celljsonarr[i]+"</h4>");
  				}
- 				else if("buildNameList" == i){ //建筑列表名字为Addr+'-'+Id,这里进行处理
+ 				else if("buildList" == i){ //建筑列表名字为Addr+'-'+Id,这里进行处理
+ 					//结构udate
  					var buildingA_I = celljsonarr[i];
+ 					for(var ii in buildingA_I){//A_I是一个Array(Object),ii=0
+ 						for(var jj in buildingA_I[ii])//jj= buildingId/isFinished
+ 						if("buildingId"==jj){
+ 							$("#buildingAddr_Id").append("<option value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
+
+ 						}
+ 					}
+
+ 					/*
  					console.log("AVC "+buildingA_I);
  					for(var j in buildingA_I)
  					{
  						$("#buildingAddr_Id").append("<option value="+buildingA_I[j]+">"
  							+buildingA_I[j]+"</option>");
  					}
+ 					*/
 
  				}
  				else if("xiaofangControlRoom"==i
@@ -115,13 +126,14 @@ body{
 
 		$(function () { 
 				 		$("#buildingAddr_Id").change(function () {
-				 			var buildingAddr;
+				 			//var buildingAddr;
 				 			var buildingId;
 				 			var temp = $("#buildingAddr_Id").val();
-				 			var idex = temp.indexOf('-');
-				 			buildingAddr = temp.substring(0,idex);
-				 			buildingId = temp.substring(idex+1,temp.length-1);//去掉栋字
-				 			$("#buildingAddr").val(buildingAddr);
+				 			//var idex = temp.indexOf('-');
+				 			//buildingAddr = temp.substring(0,idex);
+				 			//buildingId = temp.substring(idex+1,temp.length-1);//去掉栋字
+				 			buildingId = temp;
+				 			//$("#buildingAddr").val(buildingAddr);
 				 			$("#buildingId").val(buildingId);
 
 
@@ -157,7 +169,7 @@ body{
 <div class="container set-pad">
 	<div class="row text-center">
 		<div class="col-lg-12  col-md-12 col-sm-12">
-			<h2 id="cellnametitle" data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >
+			<h2 id="cellnametitle" style="color:#2f9dce" data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >
 			 	<!--use jquery add content:cellName小区名称-->
 			 
 			</h2>

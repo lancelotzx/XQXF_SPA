@@ -70,6 +70,10 @@ type='text/css'/>
     			return true; }  
 		}); 
 
+		$.extend($.validator.messages,{
+			required:"请填写此项"
+		});
+
 	
  		$().ready(function (){
 
@@ -109,7 +113,8 @@ type='text/css'/>
 	 				yinhuanFireAutoReportSystem:"火灾自动报警系统 请至少选择一项" ,
 	 				yinhuanFilterSmokeSystem:"排烟系统 请至少选择一项" ,
 	 				yinhuanXfDianTi:"消防电梯 请至少选择一项" ,
-	 				yinhuanDianLanJin:"电缆井 请至少选择一项" 
+	 				yinhuanDianLanJin:"电缆井 请至少选择一项" ,
+	 				yinhuanSafeLeave其他:"请填写此项"
  				},
  				showErrors: function(errorMap, errorList) {  
 		            var msg = "";  
@@ -217,12 +222,37 @@ type='text/css'/>
 			});
 
  			//除了无隐患以外的勾选项
-			$(":checkbox[id^='yinhuanSafeLeave'][id != 'yinhuanSafeLeave无隐患']").
+			$(":checkbox[id^='yinhuanSafeLeave'][id != 'yinhuanSafeLeave无隐患'][id!='yinhuanSafeLeave其他']").
 			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
  					$("#yinhuanSafeLeave无隐患").iCheck("uncheck");
 			});
+
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#yinhuanSafeLeave其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanSafeLeave无隐患").iCheck("uncheck");
+ 					$("#yinhuanSafeLeaveOther").removeAttr("disabled");
+ 					$("#yinhuanSafeLeaveOther").attr("required",true);
+ 					$("#yinhuanSafeLeaveOther").focus();
+
+			});
+			$("#yinhuanSafeLeave其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanSafeLeaveOther").attr("disabled",true);
+ 					$("#yinhuanSafeLeaveOther").removeAttr("required");
+
+
+			});
+
+
 			
  			
  			$("#yinhuanYjzmDevice无隐患").//选择无隐患后，其他项清空
@@ -498,7 +528,7 @@ type='text/css'/>
 					
 					<div>
 						<div class="div-a">
-							<h4><span style="color:red">*</span>独居老人人数&nbsp;&nbsp;:</h4>
+							<h4><span style="color:red">*</span>独居老人(个):</h4>
 						</div>	
 						<div class="div-b">			
 						<input type="number" min="0" id="singleOldPersonCount" name="singleOldPersonCount" class="input-me " style="width:100px;margin-top:2%" required="required"  placeholder="请填入数字" />
@@ -618,7 +648,7 @@ type='text/css'/>
 						    </li>
 							<li>
 						    <input type="checkbox" name="yinhuanSafeLeave" id="yinhuanSafeLeave其他" value="其他" />其他
-						    <input type="text" id="yinhuanSafeLeaveOther" name="yinhuanSafeLeaveOther" class="input-me" 
+						    <input type="text" id="yinhuanSafeLeaveOther" name="yinhuanSafeLeaveOther" class="input-me"  disabled="disabled"
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"/>
 						    </li>
 
