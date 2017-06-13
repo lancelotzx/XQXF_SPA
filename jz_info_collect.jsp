@@ -43,6 +43,10 @@ type='text/css'/>
 	font-size: 12pt;background:#f5f5f5;border-bottom: 0px solid #98CBF7;
 }
 
+.title {
+    text-align: center;
+}
+
 </style> 
 
 
@@ -169,6 +173,11 @@ type='text/css'/>
  					$("#"+item).val(item_v);
  				}
 
+ 				if("buildingId" == item){
+
+ 					$("#cellnametitle").html(t + buildingjsonarr[item] + "栋");
+ 				}
+
  				else if("leaveRoad"==item
  					||"safeLeaveRoad"==item
  					||"singleOldPersonCount"==item
@@ -210,6 +219,30 @@ type='text/css'/>
  			 API1:判断一个checkox项是否选中：$('#yinhuanSafeLeave未设置').is(':checked'))
  			 API2:选中事件$("#yinhuanSafeLeave无隐患").on('ifChecked',function(event){XXXX})
  			*/
+
+ 			$("#xfss其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					//$("#yinhuanSafeLeave无隐患").iCheck("uncheck");
+ 					$("#xfssOther").removeAttr("disabled");
+ 					$("#xfssOther").attr("required",true);
+ 					$("#xfssOther").focus();
+
+			});
+			$("#xfss其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#xfssOther").val("");
+ 					$("#xfssOther").attr("disabled",true);
+ 					$("#xfssOther").removeAttr("required");
+
+
+			});
+			/////////////////////////////////////////////////////////////////
  			
  			
 			
@@ -246,6 +279,7 @@ type='text/css'/>
 
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanSafeLeaveOther").val("");
  					$("#yinhuanSafeLeaveOther").attr("disabled",true);
  					$("#yinhuanSafeLeaveOther").removeAttr("required");
 
@@ -254,7 +288,7 @@ type='text/css'/>
 
 
 			
- 			
+ 			//yinhuanYjzmDevice
  			$("#yinhuanYjzmDevice无隐患").//选择无隐患后，其他项清空
  			on('ifChecked',function(event){
  					//console.log('checked');
@@ -264,11 +298,35 @@ type='text/css'/>
 			});
 
  			//除了无隐患以外的勾选项
-			$(":checkbox[id^='yinhuanYjzmDevice'][id != 'yinhuanYjzmDevice无隐患']").
+			$(":checkbox[id^='yinhuanYjzmDevice'][id != 'yinhuanYjzmDevice无隐患'][id != 'yinhuanYjzmDevice其他']").
 			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
  					$("#yinhuanYjzmDevice无隐患").iCheck("uncheck");
+			});
+
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#yinhuanYjzmDevice其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanYjzmDevice无隐患").iCheck("uncheck");
+ 					$("#yinhuanYjzmDeviceOther").removeAttr("disabled");
+ 					$("#yinhuanYjzmDeviceOther").attr("required",true);
+ 					$("#yinhuanYjzmDeviceOther").focus();
+
+			});
+			$("#yinhuanYjzmDevice其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanYjzmDeviceOther").val("");
+ 					$("#yinhuanYjzmDeviceOther").attr("disabled",true);
+ 					$("#yinhuanYjzmDeviceOther").removeAttr("required");
+
+
 			});
 
 			//yinhuanLeaveItem
@@ -281,11 +339,35 @@ type='text/css'/>
 			});
 
  			//除了无隐患以外的勾选项
-			$(":checkbox[id^='yinhuanLeaveItem'][id != 'yinhuanLeaveItem无隐患']").
+			$(":checkbox[id^='yinhuanLeaveItem'][id != 'yinhuanLeaveItem无隐患'][id != 'yinhuanLeaveItem其他']").
 			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
  					$("#yinhuanLeaveItem无隐患").iCheck("uncheck");
+			});
+
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#yinhuanLeaveItem其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanLeaveItem无隐患").iCheck("uncheck");
+ 					$("#yinhuanLeaveItemOther").removeAttr("disabled");
+ 					$("#yinhuanLeaveItemOther").attr("required",true);
+ 					$("#yinhuanLeaveItemOther").focus();
+
+			});
+			$("#yinhuanLeaveItem其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanLeaveItemOther").val("");
+ 					$("#yinhuanLeaveItemOther").attr("disabled",true);
+ 					$("#yinhuanLeaveItemOther").removeAttr("required");
+
+
 			});
 			
 
@@ -299,11 +381,35 @@ type='text/css'/>
 			});
 
  			//除了无隐患以外的勾选项
-			$(":checkbox[id^='yinhuanXfGiveWater'][id != 'yinhuanXfGiveWater无隐患']").
+			$(":checkbox[id^='yinhuanXfGiveWater'][id != 'yinhuanXfGiveWater无隐患'][id != 'yinhuanXfGiveWater其他']").
 			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
  					$("#yinhuanXfGiveWater无隐患").iCheck("uncheck");
+			});
+
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#yinhuanXfGiveWater其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanXfGiveWater无隐患").iCheck("uncheck");
+ 					$("#yinhuanXfGiveWaterOther").removeAttr("disabled");
+ 					$("#yinhuanXfGiveWaterOther").attr("required",true);
+ 					$("#yinhuanXfGiveWaterOther").focus();
+
+			});
+			$("#yinhuanXfGiveWater其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanXfGiveWaterOther").val("");
+ 					$("#yinhuanXfGiveWaterOther").attr("disabled",true);
+ 					$("#yinhuanXfGiveWaterOther").removeAttr("required");
+
+
 			});
  			
  			//yinhuanInnerKillFireSystem
@@ -316,11 +422,35 @@ type='text/css'/>
 			});
 
  			//除了无隐患以外的勾选项
-			$(":checkbox[id^='yinhuanInnerKillFireSystem'][id != 'yinhuanInnerKillFireSystem无隐患']").
+			$(":checkbox[id^='yinhuanInnerKillFireSystem'][id!='yinhuanInnerKillFireSystem无隐患'][id!='yinhuanInnerKillFireSystem其他']").
 			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
  					$("#yinhuanInnerKillFireSystem无隐患").iCheck("uncheck");
+			});
+
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#yinhuanInnerKillFireSystem其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanInnerKillFireSystem无隐患").iCheck("uncheck");
+ 					$("#yinhuanInnerKillFireSystemOther").removeAttr("disabled");
+ 					$("#yinhuanInnerKillFireSystemOther").attr("required",true);
+ 					$("#yinhuanInnerKillFireSystemOther").focus();
+
+			});
+			$("#yinhuanInnerKillFireSystem其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanInnerKillFireSystemOther").val("");
+ 					$("#yinhuanInnerKillFireSystemOther").attr("disabled",true);
+ 					$("#yinhuanInnerKillFireSystemOther").removeAttr("required");
+
+
 			});
 
 			//yinhuanAutoKillFireSystem
@@ -332,16 +462,40 @@ type='text/css'/>
  			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
- 					$(":checkbox[id^='yinhuanAutoKillFireSystem'][id != 'yinhuanAutoKillFireSystem无隐患']")
+ 					$(":checkbox[id^='yinhuanAutoKillFireSystem'][id!='yinhuanAutoKillFireSystem无隐患']")
  					.iCheck("uncheck");
 			});
 
  			//除了无隐患以外的勾选项
-			$(":checkbox[id^='yinhuanAutoKillFireSystem'][id != 'yinhuanAutoKillFireSystem无隐患']").
+			$(":checkbox[id^='yinhuanAutoKillFireSystem'][id!='yinhuanAutoKillFireSystem无隐患'][id != 'yinhuanAutoKillFireSystem其他']").
 			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
  					$("#yinhuanAutoKillFireSystem无隐患").iCheck("uncheck");
+			});
+
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#yinhuanAutoKillFireSystem其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanAutoKillFireSystem无隐患").iCheck("uncheck");
+ 					$("#yinhuanAutoKillFireSystemOther").removeAttr("disabled");
+ 					$("#yinhuanAutoKillFireSystemOther").attr("required",true);
+ 					$("#yinhuanAutoKillFireSystemOther").focus();
+
+			});
+			$("#yinhuanAutoKillFireSystem其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanAutoKillFireSystemOther").val("");
+ 					$("#yinhuanAutoKillFireSystemOther").attr("disabled",true);
+ 					$("#yinhuanAutoKillFireSystemOther").removeAttr("required");
+
+
 			});
 
 			//yinhuanFireAutoReportSystem
@@ -355,11 +509,35 @@ type='text/css'/>
 			});
 
  			//除了无隐患以外的勾选项
-			$(":checkbox[id^='yinhuanFireAutoReportSystem'][id != 'yinhuanFireAutoReportSystem无隐患']").
+			$(":checkbox[id^='yinhuanFireAutoReportSystem'][id != 'yinhuanFireAutoReportSystem无隐患'][id != 'yinhuanFireAutoReportSystem其他']").
 			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
  					$("#yinhuanFireAutoReportSystem无隐患").iCheck("uncheck");
+			});
+
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#yinhuanFireAutoReportSystem其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanFireAutoReportSystem无隐患").iCheck("uncheck");
+ 					$("#yinhuanFireAutoReportSystemOther").removeAttr("disabled");
+ 					$("#yinhuanFireAutoReportSystemOther").attr("required",true);
+ 					$("#yinhuanFireAutoReportSystemOther").focus();
+
+			});
+			$("#yinhuanFireAutoReportSystem其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanFireAutoReportSystemOther").val("");
+ 					$("#yinhuanFireAutoReportSystemOther").attr("disabled",true);
+ 					$("#yinhuanFireAutoReportSystemOther").removeAttr("required");
+
+
 			});
 
 			//yinhuanFilterSmokeSystem
@@ -372,11 +550,35 @@ type='text/css'/>
 			});
 
  			//除了无隐患以外的勾选项
-			$(":checkbox[id^='yinhuanFilterSmokeSystem'][id != 'yinhuanFilterSmokeSystem无隐患']").
+			$(":checkbox[id^='yinhuanFilterSmokeSystem'][id !='yinhuanFilterSmokeSystem无隐患'][id != 'yinhuanFilterSmokeSystem其他']").
 			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
  					$("#yinhuanFilterSmokeSystem无隐患").iCheck("uncheck");
+			});
+
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#yinhuanFilterSmokeSystem其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanFilterSmokeSystem无隐患").iCheck("uncheck");
+ 					$("#yinhuanFilterSmokeSystemOther").removeAttr("disabled");
+ 					$("#yinhuanFilterSmokeSystemOther").attr("required",true);
+ 					$("#yinhuanFilterSmokeSystemOther").focus();
+
+			});
+			$("#yinhuanFilterSmokeSystem其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanFilterSmokeSystemOther").val("");
+ 					$("#yinhuanFilterSmokeSystemOther").attr("disabled",true);
+ 					$("#yinhuanFilterSmokeSystemOther").removeAttr("required");
+
+
 			});
 
 			//yinhuanXfDianTi
@@ -389,11 +591,34 @@ type='text/css'/>
 			});
 
  			//除了无隐患以外的勾选项
-			$(":checkbox[id^='yinhuanXfDianTi'][id != 'yinhuanXfDianTi无隐患']").
+			$(":checkbox[id^='yinhuanXfDianTi'][id != 'yinhuanXfDianTi无隐患'][id !='yinhuanXfDianTi其他']").
 			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
  					$("#yinhuanXfDianTi无隐患").iCheck("uncheck");
+			});
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#yinhuanXfDianTi其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanXfDianTi无隐患").iCheck("uncheck");
+ 					$("#yinhuanXfDianTiOther").removeAttr("disabled");
+ 					$("#yinhuanXfDianTiOther").attr("required",true);
+ 					$("#yinhuanXfDianTiOther").focus();
+
+			});
+			$("#yinhuanXfDianTi其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanXfDianTiOther").val("");
+ 					$("#yinhuanXfDianTiOther").attr("disabled",true);
+ 					$("#yinhuanXfDianTiOther").removeAttr("required");
+
+
 			});
 
 			//yinhuanDianLanJin
@@ -406,11 +631,34 @@ type='text/css'/>
 			});
 
  			//除了无隐患以外的勾选项
-			$(":checkbox[id^='yinhuanDianLanJin'][id != 'yinhuanDianLanJin无隐患']").
+			$(":checkbox[id^='yinhuanDianLanJin'][id != 'yinhuanDianLanJin无隐患'][id!='yinhuanDianLanJin其他']").
 			on('ifChecked',function(event){
  					//console.log('checked');
  					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
  					$("#yinhuanDianLanJin无隐患").iCheck("uncheck");
+			});
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#yinhuanDianLanJin其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanDianLanJin无隐患").iCheck("uncheck");
+ 					$("#yinhuanDianLanJinOther").removeAttr("disabled");
+ 					$("#yinhuanDianLanJinOther").attr("required",true);
+ 					$("#yinhuanDianLanJinOther").focus();
+
+			});
+			$("#yinhuanDianLanJin其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#yinhuanDianLanJinOther").val("");
+ 					$("#yinhuanDianLanJinOther").attr("disabled",true);
+ 					$("#yinhuanDianLanJinOther").removeAttr("required");
+
+
 			});
 
 
@@ -454,18 +702,10 @@ type='text/css'/>
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
 	<div class="container">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<div  sytle="color:#fff" class=""><h3>建筑信息检查</h3></div>
+			
+			<div  sytle="color:#fff" class="title"><h3>居民小区建筑信息检查</h3></div>
 		</div>
-		<div class="navbar-collapse collapse move-me">
-			<ul class="nav navbar-nav navbar-right">
-				<li ><a href="GoToIndexAction"><h3>回到首页</h3></a></li>
-			</ul>
-		</div>
+		
 	   
 	</div>
 </div>
@@ -478,11 +718,11 @@ type='text/css'/>
 <div id="contact-sec"   >
 	<div class="overlay">
 		<div class="container set-pad">
-			<div class="row text-center">
+			<div class="row">
 				<div class="col-lg-12  col-md-12 col-sm-12">
-					<h2 id="cellnametitle" data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >
+					<h2 id="cellnametitle" style="color:#2f9dce;" data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >
 					 	<!--use jquery add content:cellName小区名称-->
-					 	&nbsp;&nbsp;
+					 	
 					 
 					</h2>
 				 
@@ -490,7 +730,7 @@ type='text/css'/>
 
 			</div>
 
-			<div style ="border:0;height:1px;background:#AFAFAF"></div>
+			<div style ="border:0;height:3px;background:#AFAFAF"></div>
 
 		 <!--/.HEADER LINE END-->		   
 			 <div class="col-lg-12  col-md-12 col-sm-12">
@@ -565,10 +805,10 @@ type='text/css'/>
 
 
 					<div >
-						<div class="div-a">
+						<div class="div-a" style="width:40%">
 							<h4><span style="color:red">*</span>建筑消防设施（多选）:</h4>
 						</div>
-						<div class="div-b">
+						<div class="div-b" style="width:55%">
 							<ul style="list-style:none;">
 						    <li>
 						    <input type="checkbox" name="xfss" id="xfss室内消火栓系统" value="室内消火栓系统"  />室内消火栓系统
@@ -600,8 +840,7 @@ type='text/css'/>
 							<li>
 						    <input type="checkbox" name="xfss" id="xfss其他" value="其他" />其他
 
-						    <input type="text" id="xfssOther" name="xfssOther" class="input-me" 
-						placeholder="其他详情" style="width:60px;border-bottom: 1px #98CBF7;"  />
+						    <input type="text" id="xfssOther" name="xfssOther" class="input-me" disabled="disabled" placeholder="其他详情" style="width:60px;border-bottom: 1px #98CBF7;"  />
 						    </li>
 							
 							</ul>
@@ -613,9 +852,8 @@ type='text/css'/>
 					<!--end add 建筑消防设施 done-->
 					
 
-					<hr />
-					<h3>主要消防隐患</h3>
-					<hr />
+					<h2 class="header-line" style="color:#2f9dce">主要消防隐患</h2>
+					<div style ="border:0;height:3px;background:#AFAFAF"></div>
 					<!--安全疏散-->
 					<div >
 						<div class="div-a" style="width:40%">
@@ -681,7 +919,7 @@ type='text/css'/>
 						    </li>
 							<li>
 						    <input type="checkbox" name="yinhuanYjzmDevice" id="yinhuanYjzmDevice其他" value="其他" />其他
-						    <input type="text" id="yinhuanYjzmDeviceOther" name="yinhuanYjzmDeviceOther" class="input-me" 
+						    <input type="text" id="yinhuanYjzmDeviceOther" name="yinhuanYjzmDeviceOther" class="input-me" disabled="disabled"
 						placeholder="其他详情" style="width:70px;border-bottom: 1px #98CBF7;" />
 						    </li>
 						</ul>
@@ -713,7 +951,7 @@ type='text/css'/>
 						    </li>
 							<li>
 						    <input type="checkbox" name="yinhuanLeaveItem" id="yinhuanLeaveItem其他" value="其他" />其他
-						    <input type="text" id="yinhuanLeaveItemOther" name="yinhuanLeaveItemOther" class="input-me" 
+						    <input type="text" id="yinhuanLeaveItemOther" name="yinhuanLeaveItemOther" class="input-me" disabled="disabled"
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"  />
 						    </li>
 						</ul>
@@ -746,7 +984,7 @@ type='text/css'/>
 						     </li>
 							<li>
 						    <input type="checkbox" name="yinhuanXfGiveWater" id="yinhuanXfGiveWater其他" value="其他" />其他
-						    <input type="text" id="yinhuanXfGiveWaterOther" name="yinhuanXfGiveWaterOther" class="input-me" 
+						    <input type="text" id="yinhuanXfGiveWaterOther" name="yinhuanXfGiveWaterOther" class="input-me" disabled="disabled"
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
 						     </li>
 							</ul>
@@ -780,7 +1018,7 @@ type='text/css'/>
 						    </li>
 							<li>
 						    <input type="checkbox" name="yinhuanInnerKillFireSystem" id="yinhuanInnerKillFireSystem其他" value="其他" />其他
-						    <input type="text" id="yinhuanInnerKillFireSystemOther" name="yinhuanInnerKillFireSystemOther" class="input-me" 
+						    <input type="text" id="yinhuanInnerKillFireSystemOther" name="yinhuanInnerKillFireSystemOther" class="input-me" disabled="disabled"
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
 						    </li>
 							</ul>
@@ -812,7 +1050,7 @@ type='text/css'/>
 						    </li>
 							<li>
 						    <input type="checkbox" name="yinhuanAutoKillFireSystem" id="yinhuanAutoKillFireSystem其他" value="其他" />其他
-						    <input type="text" id="yinhuanAutoKillFireSystemOther" name="yinhuanAutoKillFireSystemOther" class="input-me" 
+						    <input type="text" id="yinhuanAutoKillFireSystemOther" name="yinhuanAutoKillFireSystemOther" class="input-me" disabled="disabled"
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
 						    </li>
 							</ul>
@@ -843,7 +1081,7 @@ type='text/css'/>
 							<li>
 						    
 						    <input type="checkbox" name="yinhuanFireAutoReportSystem" id="yinhuanFireAutoReportSystem其他" value="其他" />其他
-						    <input type="text" id="yinhuanFireAutoReportSystemOther" name="yinhuanFireAutoReportSystemOther" class="input-me" 
+						    <input type="text" id="yinhuanFireAutoReportSystemOther" name="yinhuanFireAutoReportSystemOther" class="input-me" disabled="disabled"
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
 						    </li>
 							</ul>
@@ -873,7 +1111,7 @@ type='text/css'/>
 						    </li>
 							<li>					    
 						    <input type="checkbox" name="yinhuanFilterSmokeSystem" id="yinhuanFilterSmokeSystem其他" value="其他" />其他
-						    <input type="text" id="yinhuanFilterSmokeSystemOther" name="yinhuanFilterSmokeSystemOther" class="input-me" 
+						    <input type="text" id="yinhuanFilterSmokeSystemOther" name="yinhuanFilterSmokeSystemOther" class="input-me" disabled="disabled"
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;" />
 							</li>
 						</ul>
@@ -902,7 +1140,7 @@ type='text/css'/>
 						    </li>
 							<li>
 						    <input type="checkbox" name="yinhuanXfDianTi" id="yinhuanXfDianTi其他" value="其他" />其他
-						    <input type="text" id="yinhuanXfDianTiOther" name="yinhuanXfDianTiOther" class="input-me" 
+						    <input type="text" id="yinhuanXfDianTiOther" name="yinhuanXfDianTiOther" class="input-me" disabled="disabled"
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"  />
 						    </li>
 							</ul>
@@ -934,7 +1172,7 @@ type='text/css'/>
 						    </li>
 							<li> 
 						    <input type="checkbox" name="yinhuanDianLanJin" id="yinhuanDianLanJin其他" value="其他" />其他
-						    <input type="text" id="yinhuanDianLanJinOther" name="yinhuanDianLanJinOther" class="input-me" 
+						    <input type="text" id="yinhuanDianLanJinOther" name="yinhuanDianLanJinOther" class="input-me" disabled="disabled"
 						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"  />
 							</li>
 						</ul>
@@ -946,7 +1184,7 @@ type='text/css'/>
 
 					
 					<div class="form-group">
-						<button type="submit" class="btn btn-info btn-block btn-lg">数据提交</button>
+						<button type="submit" class="btn btn-info btn-block btn-lg" style="background-color:#2f9dce">数据提交</button>
 					</div>
 
 				</form>

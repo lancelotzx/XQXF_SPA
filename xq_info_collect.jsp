@@ -167,7 +167,7 @@ body{
 <div id="contact-sec"   >
 	   <div class="overlay">
 <div class="container set-pad">
-	<div class="row text-center">
+	<div class="row">
 		<div class="col-lg-12  col-md-12 col-sm-12">
 			<h2 id="cellnametitle" style="color:#2f9dce" data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >
 			 	<!--use jquery add content:cellName小区名称-->
@@ -177,7 +177,7 @@ body{
 		</div>
 
 	</div>
-	<div style ="border:0;height:1px;background:#AFAFAF"></div>
+	<div style ="border:0;height:3px;background:#AFAFAF"></div>
 		 <!--/.HEADER LINE END-->
 	
 		 <!--/.HEADER LINE END-->
@@ -496,7 +496,8 @@ body{
 					<!--小区建筑选择end-->
 					
 					<div class="form-group">
-						<button id="xq_submit" type="submit" class="btn btn-info btn-block btn-lg">数据提交</button>
+						<button id="xq_submit" type="submit" class="btn btn-info btn-block btn-lg"
+						style="background-color:#2f9dce">数据提交</button>
 					</div>
 
 				</form>
