@@ -144,12 +144,13 @@ body{
 
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
 	<div class="container">
+		
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" style="float:left;margin-left:15px;
-			margin-top:12px;border:0px solid" onClick="location.href='GoToIndexAction'">
-				<i class="icon-angle-left icon-2x"></i>
+			<button type="button button-lg" class="navbar-toggle" >
+				<i class="icon-angle-left icon-2x"></i> 
 			</button>
-			<div  sytle="color:#fff"><h3 style="margin-left:25%">居民小区消防检查</h3></div>
+			
+			<div  sytle="color:#fff" style="margin-left:20%" ><h3 >居民小区消防检查</h3></div>
 		</div>
 		<!--
 		<div class="navbar-collapse collapse move-me">
@@ -172,7 +173,7 @@ body{
 	   <div class="overlay">
 <div class="container set-pad">
 	<div class="row">
-		<div class="col-lg-12  col-md-12 col-sm-12">
+		<div class="">
 			<h2 id="cellnametitle" style="color:#2f9dce" data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >
 			 	<!--use jquery add content:cellName小区名称-->
 			 
@@ -188,7 +189,7 @@ body{
 	 
 	   
 		   
-			 <div class="col-lg-12  col-md-12  col-sm-12">
+			 <div >
 				<form 	role = "form" id="xq_info_collect_form" name="xqform" action="SetCellAction" method="post">
 					<input id="cellName" name="cellName" type="hidden" value=""/>
 					<!--下面这个地方修改了，和dzf确认

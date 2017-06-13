@@ -108,10 +108,10 @@ body{
 									   当提示是否允许手机定位权限时，请选择“是”。
 								   </p>
 								   
-								<input type="hidden" id="latd" name="latd" value="" />
-								<input type="hidden" id="lng"  name="lng"  value="" />
+								<input type="hidden" id="latd" name="latd" value="-1" />
+								<input type="hidden" id="lng"  name="lng"  value="-1" />
 								
-							   	<button type="button" id="GPSshow" class="btn btn-info btn-block btn-lg" >
+							   	<button type="submit" id="GPSshow" class="btn btn-info btn-block btn-lg" style="background-color:#2f9dce" >
 							   	开始填写</button>
 								
 					            <script>
@@ -143,8 +143,8 @@ body{
 									},{enableHighAccuracy: true});
 
 									$(function () { 
-				 						$('#GPSshow').on('click', function () {
-				      						$('#locateform').submit();
+				 						$('#GPSshow1').on('click', function () {
+				      							$('#locateform').submit();
 				  						})
 				   					});
 								</script>
