@@ -699,6 +699,23 @@ type='text/css'/>
  	})
 	</script>
 
+<div class="navbar navbar-inverse navbar-fixed-top col-xs-12" id="menu">
+	<div class="container">
+
+
+		<div class="navbar-header">
+			<div class="col-xs-1" style="margin-top:13px">
+				<i onclick="javascript:window.location.href=
+				'GoToIndexAction'" class="icon-angle-left icon-3x"></i>
+			</div>
+			
+			<div class="col-xs-10" sytle="color:#fff"><h3 class="title">居民小区建筑信息消防检查</h3></div>
+		</div>
+	   
+	</div>
+</div>
+
+<!--
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
 	<div class="container">
 		<div class="navbar-header">
@@ -713,6 +730,7 @@ type='text/css'/>
 	   
 	</div>
 </div>
+-->
   <!--NAVBAR SECTION END-->
    
 

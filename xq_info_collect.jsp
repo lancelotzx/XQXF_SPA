@@ -142,27 +142,23 @@ body{
 		});
 	</script>
 
-<div class="navbar navbar-inverse navbar-fixed-top " id="menu">
-	<div class="container">
-		
-		<div class="navbar-header">
-			<button type="button button-lg" class="navbar-toggle" >
-				<i class="icon-angle-left icon-2x"></i> 
-			</button>
-			
-			<div  sytle="color:#fff" style="margin-left:20%" ><h3 >居民小区消防检查</h3></div>
-		</div>
-		<!--
-		<div class="navbar-collapse collapse move-me">
-			<ul class="nav navbar-nav navbar-right">
-				<li ><a href="GoToIndexAction"><h3>回到首页</h3></a></li>
 
-			</ul>
+<div class="navbar navbar-inverse navbar-fixed-top col-xs-12" id="menu">
+	<div class="container">
+
+
+		<div class="navbar-header">
+			<div class="col-xs-1" style="margin-top:13px">
+				<i onclick="javascript:window.location.href=
+				'GoToIndexAction'" class="icon-angle-left icon-3x"></i>
+			</div>
+			
+			<div class="col-xs-10" sytle="color:#fff"><h3 class="title">居民小区消防检查</h3></div>
 		</div>
-		-->
 	   
 	</div>
 </div>
+
   <!--NAVBAR SECTION END-->
    
 

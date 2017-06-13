@@ -29,6 +29,10 @@ text/css' />
 <script src="http://api.map.baidu.com/getscript?v=2.0&ak=jnu9Z2xhGz7C22mOt1VfIzmY4amPh2No&services=&t=20170517145936"></script>
 
 <style>
+<style> 
+.div-a{ float:left;display:table-cell;vertical-align: middle; width: 52%} 
+.div-b{ float:left;display:table-cell;vertical-align: middle; width: 48%} 
+
 .title {
     text-align: center;
 }
@@ -56,15 +60,25 @@ body{
 			tempPcsName = request.getAttribute("pcsname").toString();
 	%>
 
-<div class="navbar navbar-inverse navbar-fixed-top " id="menu">
+
+
+
+<div class="navbar navbar-inverse navbar-fixed-top col-xs-12" id="menu">
 	<div class="container">
+
+
 		<div class="navbar-header">
+			<div class="col-xs-1" style="margin-top:13px">
+				<i onclick="javascript:window.location.href=
+				'http://xf.91yunpan.com/weixin/portal/index'" class="icon-angle-left icon-3x"></i>
+			</div>
 			
-			<div  sytle="color:#fff"><h3 class="title">居民小区消防检查</h3></div>
+			<div class="col-xs-10" sytle="color:#fff"><h3 class="title">居民小区消防检查</h3></div>
 		</div>
 	   
 	</div>
 </div>
+
 
   <!--NAVBAR SECTION END-->
 <div class="" id="home" >
