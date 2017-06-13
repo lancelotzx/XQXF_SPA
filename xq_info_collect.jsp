@@ -12,7 +12,6 @@
 <!-- BOOTSTRAP CORE STYLE CSS -->
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
 <!-- FONT AWESOME CSS -->
-<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
  <!-- FLEXSLIDER CSS -->
 <link href="assets/css/flexslider.css" rel="stylesheet" />
 <!-- CUSTOM STYLE CSS -->
@@ -25,6 +24,7 @@
 <link href="http://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet" type='
 text/css' />
 <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
 
 <style> 
 .div-a{ float:left;display:table-cell;vertical-align: middle; width: 52%} 
@@ -145,7 +145,11 @@ body{
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
 	<div class="container">
 		<div class="navbar-header">
-			<div  sytle="color:#fff"><h3 class="title">居民小区消防检查</h3></div>
+			<button type="button" class="navbar-toggle" style="float:left;margin-left:15px;
+			margin-top:12px;border:0px solid" onClick="location.href='GoToIndexAction'">
+				<i class="icon-angle-left icon-2x"></i>
+			</button>
+			<div  sytle="color:#fff"><h3 style="margin-left:25%">居民小区消防检查</h3></div>
 		</div>
 		<!--
 		<div class="navbar-collapse collapse move-me">
