@@ -99,6 +99,7 @@ type='text/css'/>
 	 				yinhuanFilterSmokeSystem:"required" ,
 	 				yinhuanXfDianTi:"required" ,
 	 				yinhuanDianLanJin:"required" ,
+	 				dqhzzhzl:"required"
 
  				},
  				messages:{
@@ -118,7 +119,7 @@ type='text/css'/>
 	 				yinhuanFilterSmokeSystem:"排烟系统 请至少选择一项" ,
 	 				yinhuanXfDianTi:"消防电梯 请至少选择一项" ,
 	 				yinhuanDianLanJin:"电缆井 请至少选择一项" ,
-	 				yinhuanSafeLeave其他:"请填写此项"
+	 				dqhzzhzl:"电气火灾综合治理 请至少选择一项"
  				},
  				showErrors: function(errorMap, errorList) {  
 		            var msg = "";  
@@ -161,6 +162,7 @@ type='text/css'/>
  				"yinhuanFilterSmokeSystem",
  				"yinhuanXfDianTi",
  				"yinhuanDianLanJin",
+ 				"dqhzzhzl",
  				"xfss"
  				);
 
@@ -193,6 +195,7 @@ type='text/css'/>
  					||"yinhuanFireAutoReportSystemOther"==item
  					||"yinhuanFilterSmokeSystemOther"==item
  					||"yinhuanXfDianTiOther"==item
+ 					||"dqhzzhzlOther" == item
  					||"yinhuanDianLanJinOther"==item){//简单的input字段
  					var obj=$("#"+item);
  					obj.val(item_v);
@@ -660,6 +663,48 @@ type='text/css'/>
 
 
 			});
+
+			//dqhzzhzl
+			$("#dqhzzhzl无隐患").//选择无隐患后，其他项清空
+ 			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$(":checkbox[id^='dqhzzhzl'][id != 'dqhzzhzl无隐患']")
+ 					.iCheck("uncheck");
+			});
+
+ 			//除了无隐患以外的勾选项
+			$(":checkbox[id^='dqhzzhzl'][id != 'dqhzzhzl无隐患'][id!='dqhzzhzl其他']").
+			on('ifChecked',function(event){
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#dqhzzhzl无隐患").iCheck("uncheck");
+			});
+			//勾选其他项 1.无隐患清空，2.disable 清除 3.其他other input focus,4增加validate
+			$("#dqhzzhzl其他").
+			on('ifChecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#dqhzzhzl无隐患").iCheck("uncheck");
+ 					$("#dqhzzhzlOther").removeAttr("disabled");
+ 					$("#dqhzzhzlOther").attr("required",true);
+ 					$("#dqhzzhzlOther").focus();
+
+			});
+			$("#dqhzzhzl其他").
+			on('ifUnchecked',function(event){
+
+ 					//console.log('checked');
+ 					//console.log('other value='+$('#yinhuanSafeLeave未设置').is(':checked'));
+ 					$("#dqhzzhzlOther").val("");
+ 					$("#dqhzzhzlOther").attr("disabled",true);
+ 					$("#dqhzzhzlOther").removeAttr("required");
+
+
+			});
+
+
 
 
  			/* Test OK
@@ -1172,8 +1217,48 @@ type='text/css'/>
 					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
 					<!--end add 消防电梯 done-->
 
+					<!--电气火灾综合治理-->
+					<div >
+						<div class="div-a" style="width:40%">
+							<span style="color:red">*</span>电气火灾综合治理:
+						</div>
+						<div class="div-b" style="width:59%">
+							<ul style="list-style:none;">
+						    <li>
+						    <input type="checkbox" name="dqhzzhzl" id="dqhzzhzl无隐患" value="无隐患" />无隐患
+						    </li>
+							<li>
+						    <input type="checkbox" name="dqhzzhzl" id="dqhzzhzl电气线路不符合国家有关标准规定-电表箱位置不符合规范" value="电气线路不符合国家有关标准规定-电表箱位置不符合规范" />电气线路不符合国家有关标准规定-电表箱位置不符合规范
+						    </li>
+							<li>
+						    <input type="checkbox" name="dqhzzhzl" id="dqhzzhzl电气线路不符合国家有关标准规定-线路连接不符合标准" value="电气线路不符合国家有关标准规定-线路连接不符合标准" />电气线路不符合国家有关标准规定-线路连接不符合标准
+						    </li>
+							<li>
+						    <input type="checkbox" name="dqhzzhzl" id="dqhzzhzl用电负荷超过初装容量" value="用电负荷超过初装容量" />用电负荷超过初装容量
+						    </li>
+						    <li>
+						    <input type="checkbox" name="dqhzzhzl" id="dqhzzhzl乱拉乱接电线" value="乱拉乱接电线" />乱拉乱接电线
+						    </li>
+						    <li>
+						    <input type="checkbox" name="dqhzzhzl" id='dqhzzhzl使用「三无」电气产品' value='使用「三无」电气产品' />使用「三无」电气产品
+							</li>
+							<li>
+						    <input type="checkbox" name="dqhzzhzl" id="dqhzzhzl违规电动车充电" value="违规电动车充电" />违规电动车充电
+						    </li>
+						    <li>
+						    
+							<li> 
+						    <input type="checkbox" name="dqhzzhzl" id="dqhzzhzl其他" value="其他" />其他
+						    <input type="text" id="dqhzzhzlOther" name="dqhzzhzlOther" class="input-me" disabled="disabled"
+						placeholder="其他详情" style="width:80px;border-bottom: 1px #98CBF7;"  />
+							</li>
+						</ul>
+						</div>
+					</div>
 
-					<!--电梯井-->
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
+					<!--end add 电梯井 done-->
+					<!--电缆井-->
 					<div >
 						<div class="div-a" style="width:40%">
 							<span style="color:red">*</span>电缆井:

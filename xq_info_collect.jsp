@@ -33,7 +33,7 @@ text/css' />
 <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
 
 <style> 
-.div-a{ float:left;display:table-cell;vertical-align: middle; width: 52%} 
+.div-a{ float:left;display:table-cell;vertical-align: middle; width: 52%;height: 50px} 
 .div-b{ float:left;display:table-cell;vertical-align: middle; width: 48%} 
 
 .div-c1{ float:left;width:50%;display:table-cell;vertical-align: middle;} 
@@ -72,6 +72,16 @@ body{
 	%>
 	<script>
 
+		//用来保存门栋-门牌地址对应关系
+		function　Addr_Id_Obj(){
+			var ai= new Object();
+			ai.id="";
+			ai.addr=[];
+			return ai;
+		}
+
+		var ai_arr = [];
+
  		$().ready(function (){
 
  			var celljsonarr = eval(<%=tempCellJsonString%>);
@@ -89,23 +99,43 @@ body{
  				 ||"jyplSystemCount" == i
  				 ||"monitorSmokingDeviceCount" == i
  				 ){
- 					$("#"+i).html("<h4>"+celljsonarr[i]+"</h4>");
+ 				 	var tvalue = celljsonarr[i];
+ 				 	if("0" == tvalue){
+ 				 		tvalue="不用填写，系统自动生成";
+ 				 	}
+ 					$("#"+i).html("<h4>"+ tvalue +"</h4>");
  				}
  				else if("buildList" == i){ //建筑列表名字为Addr+'-'+Id,这里进行处理
  					//结构udate
  					var buildingA_I = celljsonarr[i];
  					for(var ii in buildingA_I){//A_I是一个Array(Object),ii=0
  						for(var jj in buildingA_I[ii]){//jj= buildingId/isFinished
-	 						if(("buildingId"==jj) && ("1" != buildingA_I[ii]["isFinished"])){
-	 						//没有填完，
-	 							$("#buildingAddr_Id").append("<option data-content=\"<span class='label label-info'>"+buildingA_I[ii][jj]+"栋"+"</span>\" value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
 
-	 						}
-	 						else if(("buildingId"==jj) && ("1" == buildingA_I[ii]["isFinished"])){
-	 							//填完了
-	 							$("#buildingAddr_Id").append("<option data-content=\"<span class='label label-success'>"+buildingA_I[ii][jj]+"栋"+"</span>\" value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
+ 							if("buildingId" == jj){
+ 								var x = Addr_Id_Obj();
+ 								x.id = buildingA_I[ii][jj];
+ 								for(var i = 0;i < buildingA_I[ii]["mpdzList"].length;i++){
+ 									x.addr.push(buildingA_I[ii]["mpdzList"][i]);
+ 								}
+ 								ai_arr.push(x);
 
-	 						}
+
+
+
+ 								if("1" != buildingA_I[ii]["isFinished"]){
+	 								//没有填完，蓝色
+	 								$("#buildingAddr_Id").append("<option data-content=\"<span class='label label-info'>"+buildingA_I[ii][jj]+"栋"+"</span>\" value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
+
+	 							}
+	 							else if("1" == buildingA_I[ii]["isFinished"]){
+	 								//填完了，绿色
+		 							$("#buildingAddr_Id").append("<option data-content=\"<span class='label label-success'>"+buildingA_I[ii][jj]+"栋"+"</span>\" value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
+
+	 							}
+
+
+ 							}
+
 
 	 					}
  					}
@@ -125,7 +155,8 @@ body{
  					||"business" == i
  					||"dangerThing" == i
  					||"autoMobile" == i ){
- 						$("input:radio[name="+i+"][value="+celljsonarr[i]+"]").attr("checked",true);
+ 						if(""!=celljsonarr[i])
+ 							$("input:radio[name="+i+"][value="+celljsonarr[i]+"]").attr("checked",true);
 
 
  				}
@@ -151,7 +182,20 @@ body{
 				 			//buildingId = temp.substring(idex+1,temp.length-1);//去掉栋字
 				 			buildingId = temp;
 				 			//$("#buildingAddr").val(buildingAddr);
-				 			$("#buildingId").val(buildingId);
+				 			$("#buildingId").val(buildingId);//提交门栋数据
+
+				 			for(var i in ai_arr){
+				 				if(buildingId == ai_arr[i].id){
+				 					$("#addr_list_title").empty();
+				 					$("#addr_list_title").append("本门栋对应的门牌地址为：");
+				 					$("#addr_list_val").empty();
+				 					for(var j in ai_arr[i].addr)
+				 						$("#addr_list_val").append("<p>"+(ai_arr[i].addr)[j]+"</p>");
+
+				 				}
+				 			}
+
+				 			
 
 
 				      		//$("#xq_info_collect_form").submit();
@@ -511,7 +555,21 @@ body{
 						</div>
 						
 					</div>
+					<div  style ="clear:both; border:0;height:1px;background:#AFAFAF"></div>
 					<!--小区建筑选择end-->
+					<!--门牌地址表-->
+					<div class="container">
+						<div class="div-a">
+							<h4 id="addr_list_title">
+
+							</h4>
+						</div>
+						<div class="div-b" id="addr_list_val">
+
+						    	  				     	
+						</div>
+						
+					</div>
 					
 					<div class="form-group">
 						<button id="xq_submit" type="submit" class="btn btn-info btn-block btn-lg"
