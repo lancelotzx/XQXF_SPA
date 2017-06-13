@@ -21,9 +21,15 @@
 
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--
 <link href="http://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet" type='
 text/css' />
 <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+-->
+
+<link href="http://cdn.bootcss.com/bootstrap-select/1.12.2/css/bootstrap-select.min.css" rel="stylesheet">
+<script src="http://cdn.bootcss.com/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
 <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
 
 <style> 
@@ -50,6 +56,10 @@ text/css' />
 }
 body{
     font-size: 18px;
+}
+
+.unfinish{
+	color:#2f9dce;
 }
 
 </style> 
@@ -85,12 +95,21 @@ body{
  					//结构udate
  					var buildingA_I = celljsonarr[i];
  					for(var ii in buildingA_I){//A_I是一个Array(Object),ii=0
- 						for(var jj in buildingA_I[ii])//jj= buildingId/isFinished
- 						if("buildingId"==jj){
- 							$("#buildingAddr_Id").append("<option value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
+ 						for(var jj in buildingA_I[ii]){//jj= buildingId/isFinished
+	 						if(("buildingId"==jj) && ("1" != buildingA_I[ii]["isFinished"])){
+	 						//没有填完，
+	 							$("#buildingAddr_Id").append("<option data-content=\"<span class='label label-info'>"+buildingA_I[ii][jj]+"栋"+"</span>\" value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
 
- 						}
+	 						}
+	 						else if(("buildingId"==jj) && ("1" == buildingA_I[ii]["isFinished"])){
+	 							//填完了
+	 							$("#buildingAddr_Id").append("<option data-content=\"<span class='label label-success'>"+buildingA_I[ii][jj]+"栋"+"</span>\" value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
+
+	 						}
+
+	 					}
  					}
+ 				}
 
  					/*
  					console.log("AVC "+buildingA_I);
@@ -100,8 +119,6 @@ body{
  							+buildingA_I[j]+"</option>");
  					}
  					*/
-
- 				}
  				else if("xiaofangControlRoom"==i
  					||"smallXiaofangStation" == i
  					||"xiaofangCarRoad" == i
@@ -484,7 +501,7 @@ body{
 							<h4><span style="color:red">*</span>请选择本小区待排查建筑:</h4>
 						</div>
 						<div class="div-b">
-						    <select id="buildingAddr_Id" name="buildingAddr_Id" class="form-control" required="required">
+						    <select id="buildingAddr_Id" name="buildingAddr_Id" class="selectpicker" style="font-size:18px" required="required">
 						    		<option value="" selected="true" disabled="true">请选择
 									</option>
 									
