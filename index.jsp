@@ -23,7 +23,9 @@
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="http://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet" type='
 text/css' />
-<script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+
+<link href="http://cdn.bootcss.com/bootstrap-select/1.12.2/css/bootstrap-select.min.css" rel="stylesheet">
+<script src="http://cdn.bootcss.com/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
 <!-- Baidu MAP JS API -->
 <script src="http://api.map.baidu.com/getscript?v=2.0&ak=jnu9Z2xhGz7C22mOt1VfIzmY4amPh2No&services=&t=20170517145936"></script>
@@ -54,15 +56,42 @@ body{
 
 </head>
 <body >
-	<%
-		String tempCellString = "";
-		if(null != request.getAttribute("cellList"))
-			tempCellString = request.getAttribute("cellList").toString().trim();
+<%
+	String tempCellString = "" ;
+	if(null != request.getAttribute("cellList")){
+		tempCellString = request.getAttribute("cellList").toString();
+		//out.println("aaaaa"+tempCellString);
+		//out.println(tempCellString);
+	}
 
-		String tempPcsName  = "";
-		if(null != request.getAttribute("pcsname"))
-			tempPcsName = request.getAttribute("pcsname").toString();
-	%>
+
+	String tempPcsName  = "";
+	if(null != request.getAttribute("pcsname"))
+		tempPcsName = request.getAttribute("pcsname").toString();
+%>
+
+<script>
+	$().ready(function (){
+		var cellList = <%=tempCellString%>;
+		for(var i in cellList){
+			for(var j in cellList[i]){
+				if("isFinished" == j){
+					if(1 == cellList[i][j]){// isFinished == 1,设置绿色option先
+						$("#xqmc").append("<option data-content=\"<span class='label label-success optionfont'>"+cellList[i]["cellName"]+"</span>\" value="+cellList[i]["cellName"]+">"+cellList[i]["cellName"]+"</option>");
+					}
+					else{//isFinished != 1 设置蓝色
+						$("#xqmc").append("<option data-content=\"<span class='label label-info optionfont'>"+cellList[i]["cellName"]+"</span>\" value="+cellList[i]["cellName"]+">"+cellList[i]["cellName"]+"</option>");					
+					}
+
+				}
+
+			}
+		}
+
+	});
+
+</script>
+
 
 
 
@@ -77,7 +106,7 @@ body{
 				'http://xf.91yunpan.com/weixin/portal/index'" class="icon-angle-left icon-3x"></i>
 			</div>
 			
-			<div class="col-xs-10" sytle="color:#fff"><h3 class="title">居民小区消防检查</h3></div>
+			<div class="col-xs-10" sytle="color:#fff"><h3 class="title">居民小区消防安全普查</h3></div>
 		</div>
 	   
 	</div>
@@ -111,12 +140,10 @@ body{
 									      请下拉选择检查的居民小区。
 								   		</p>
 										<div class="form-group">
-											<select id="xqmc" name="xqmc" class="form-control" style="font-size:18px" required="required">
+											<select id="xqmc" name="xqmc" class="selectpicker" style="font-size:18px" required="required">
 											<option value="" selected="true" disabled="true">请选择
 											</option>
-											<c:forEach items="${cellList}" var="cellname">
-											<option value=${cellname} ><h4> ${cellname} </h4></option>
-											</c:forEach>
+											
 											</select>
 										</div>
 									</div>

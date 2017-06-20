@@ -62,6 +62,10 @@ body{
 	color:#2f9dce;
 }
 
+.optionfont{
+	font-size: 18px;
+}
+
 </style> 
 
 
@@ -71,6 +75,7 @@ body{
 		String tempCellJsonString = request.getAttribute("cellBean").toString();		
 	%>
 	<script>
+
 
 		//用来保存门栋-门牌地址对应关系
 		function　Addr_Id_Obj(){
@@ -124,12 +129,12 @@ body{
 
  								if("1" != buildingA_I[ii]["isFinished"]){
 	 								//没有填完，蓝色
-	 								$("#buildingAddr_Id").append("<option data-content=\"<span class='label label-info'>"+buildingA_I[ii][jj]+"栋"+"</span>\" value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
+	 								$("#buildingAddr_Id").append("<option data-content=\"<span class='label label-info optionfont'>"+buildingA_I[ii][jj]+"栋"+"</span>\" value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
 
 	 							}
 	 							else if("1" == buildingA_I[ii]["isFinished"]){
 	 								//填完了，绿色
-		 							$("#buildingAddr_Id").append("<option data-content=\"<span class='label label-success'>"+buildingA_I[ii][jj]+"栋"+"</span>\" value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
+		 							$("#buildingAddr_Id").append("<option data-content=\"<span class='label label-success optionfontm'>"+buildingA_I[ii][jj]+"栋"+"</span>\" value="+buildingA_I[ii][jj]+">"+buildingA_I[ii][jj]+"栋</option></hr>");
 
 	 							}
 
@@ -214,7 +219,7 @@ body{
 				'GoToIndexAction'" class="icon-angle-left icon-3x"></i>
 			</div>
 			
-			<div class="col-xs-10" sytle="color:#fff"><h3 class="title">居民小区消防检查</h3></div>
+			<div class="col-xs-10" sytle="color:#fff"><h3 class="title">居民小区消防普查</h3></div>
 		</div>
 	   
 	</div>
@@ -545,7 +550,7 @@ body{
 							<h4><span style="color:red">*</span>请选择本小区待排查建筑:</h4>
 						</div>
 						<div class="div-b">
-						    <select id="buildingAddr_Id" name="buildingAddr_Id" class="selectpicker" style="font-size:18px" required="required">
+						    <select id="buildingAddr_Id" name="buildingAddr_Id" class="selectpicker"  data-width="120px" required="required">
 						    		<option value="" selected="true" disabled="true">请选择
 									</option>
 									
